@@ -31,7 +31,14 @@ export const SubElementItem = ({
 
   return (
     <Card
-      title={<CardTitle title={item.element as any} onDelete={handleDelete} />}
+      title={
+        <CardTitle
+          title={item.element as any}
+          onDelete={handleDelete}
+          onEdit={() => console.log("1")}
+          isEdit={false}
+        />
+      }
       extra={
         <b className="cursor-pointer" onClick={handleOpen}>
           {!isOpen ? <CaretDownFilled /> : <CaretUpFilled />}

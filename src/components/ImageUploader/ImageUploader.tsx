@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Image, Upload } from "antd";
 import type { GetProp, UploadFile, UploadProps } from "antd";
@@ -60,7 +60,7 @@ export const ImageUploader = ({ onChange }: Props) => {
     }, */
   ]);
   
-  console.log(fileList)
+  console.log(fileList, onChange)
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
