@@ -1,10 +1,22 @@
 import { Spin } from "antd";
-import { Suspense, lazy } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Suspense, lazy, useEffect } from "react";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { tokenService } from "../service/tokenService";
 
 export const AppRoutes = () => {
   const Login = lazy(() => import("../modules/Login"));
   const Main = lazy(() => import("../modules/Main"));
+
+
+  const auth = tokenService.getIsAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth) {
+      navigate("/login");
+    }
+  }, [auth, navigate]);
+
 
   return (
     <Suspense fallback={<Spin />}>
