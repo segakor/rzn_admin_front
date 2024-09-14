@@ -17,7 +17,7 @@ export const useLogin = () => {
     },
     onError: (err: any) => {
       notification.error({
-        message: err,
+        message: err.statusText,
         duration: 10,
       });
       console.log(err);

@@ -1,5 +1,6 @@
-import { QueryClient, QueryClientProvider as QCP } from "@tanstack/react-query";
-import { ReactElement, ReactNode } from "react";
+import { QueryClientProvider as QCP } from "@tanstack/react-query";
+import { ReactElement, ReactNode, useState } from "react";
+import { generateNewClient } from "../../config/queryClient";
 
 interface IQueryClientProviderProps {
   children: ReactNode;
@@ -8,7 +9,6 @@ interface IQueryClientProviderProps {
 export const QueryClientProvider = ({
   children,
 }: IQueryClientProviderProps): ReactElement => {
-  const queryClient = new QueryClient();
-
+  const [queryClient] = useState(generateNewClient);
   return <QCP client={queryClient}>{children}</QCP>;
 };

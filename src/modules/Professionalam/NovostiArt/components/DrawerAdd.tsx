@@ -83,7 +83,7 @@ export const DrawerAdd = ({ onClose, open }: Props) => {
           rules={[{ required: true, message: "Заполните обязательное поле" }]}
         >
           <Input placeholder="" size="large" hidden />
-          <ImageUploader onChange={onChangeImageUploader} />
+          <ImageUploader onChange={onChangeImageUploader} destination="novosti-art"/>
         </Form.Item>
         <Divider className="mt-7 mb-7" />
         <Form.Item>

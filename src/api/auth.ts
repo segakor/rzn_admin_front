@@ -8,7 +8,7 @@ export const login = async ({
   password: string;
 }) => {
   return (
-    await axiosClient.post<{ token: string }>(`/api/login`, {
+    await axiosClient.post<{ token: string }>(`/login`, {
       userName,
       password,
     })

@@ -13,19 +13,19 @@ export type TNewsArt = {
 export const getNewsArt = async () => {
   return (
     await axiosClient.get<TResponseTableData<TNewsArt[]>>(
-      `/api/newsArt`
+      `/newsArt`
     )
   ).data;
 };
 
 export const deleteNewsArt = async (id: number) => {
   return (
-    await axiosClient.delete(`/api/newsArt/${id}`)
+    await axiosClient.delete(`/newsArt/${id}`)
   ).data;
 };
 
 export const createNewsArt = async (body: TNewsArt) => {
   return (
-    await axiosClient.post(`/api/newsArt`, { body })
+    await axiosClient.post(`/newsArt`, { body })
   ).data;
 };

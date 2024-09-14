@@ -16,9 +16,10 @@ const getBase64 = (file: FileType): Promise<string> =>
 
 type Props = {
   onChange: (e: string) => void;
+  destination: string;
 };
 
-export const ImageUploader = ({ onChange }: Props) => {
+export const ImageUploader = ({ onChange, destination }: Props) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([
@@ -59,8 +60,8 @@ export const ImageUploader = ({ onChange }: Props) => {
       status: 'error',
     }, */
   ]);
-  
-  console.log(fileList, onChange)
+
+  console.log(fileList, onChange);
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
@@ -84,13 +85,13 @@ export const ImageUploader = ({ onChange }: Props) => {
   return (
     <>
       <Upload
-        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+        /*  action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload" */
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
         accept="image/png, image/jpeg"
-        customRequest={uploadImgBB}
+        customRequest={(data) => uploadImgBB(data, destination)}
       >
         {fileList.length >= 1 ? null : uploadButton}
       </Upload>

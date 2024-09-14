@@ -3,7 +3,9 @@ import { tokenService } from "../service/tokenService";
 
 export const axiosClient = axios;
 
-axiosClient.defaults.baseURL = 'https://ryazantourism.ru/'
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+axiosClient.defaults.baseURL = BASE_URL;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 axiosClient.interceptors.request.use((config: any) => {

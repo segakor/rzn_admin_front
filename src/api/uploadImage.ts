@@ -1,11 +1,14 @@
 import { axiosClient } from "../config";
 
-export const uploadImgBB = async (data: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const uploadImgBB = async (data: any, destination: string) => {
   //NOTE: data type UploadRequestOption
   try {
     const form = new FormData();
-    form.append("image", data.file);
-    const response = await axiosClient.post(`http://79.174.85.156:5001/api/media/image`, form);
+    form.append("file", data.file);
+    const response = await axiosClient.post(`/upload`, form, {
+      params: { destination },
+    });
     data.onSuccess(response.data);
   } catch (error) {
     data.onError(error);
