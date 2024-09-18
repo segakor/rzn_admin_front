@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Image, Upload } from "antd";
 import type { GetProp, UploadFile, UploadProps } from "antd";
 import { uploadImgBB } from "../../api/uploadImage";
+import { getImageUrl } from "../../service/getImageUrl";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -15,53 +16,15 @@ const getBase64 = (file: FileType): Promise<string> =>
   });
 
 type Props = {
-  onChange: (e: string) => void;
+  onChange: (e: number) => void;
   destination: string;
+  initialPath?: string;
 };
 
-export const ImageUploader = ({ onChange, destination }: Props) => {
+export const ImageUploader = ({ onChange, destination, initialPath }: Props) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  const [fileList, setFileList] = useState<UploadFile[]>([
-    /*    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-2',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-3',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-4',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-xxx',
-      percent: 50,
-      name: 'image.png',
-      status: 'uploading',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    },
-    {
-      uid: '-5',
-      name: 'image.png',
-      status: 'error',
-    }, */
-  ]);
-
-  console.log(fileList, onChange);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
@@ -82,16 +45,38 @@ export const ImageUploader = ({ onChange, destination }: Props) => {
     </button>
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const getImageData = async (data: any) => {
+    try {
+      const res = await uploadImgBB(data, destination);
+      if (res) {
+        onChange(res.id);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (initialPath) {
+      setFileList([{
+        uid: '-xxx',
+        name: 'image.png',
+        status: 'done',
+        url: getImageUrl(initialPath),
+      },])
+    }
+  }, [initialPath])
+
   return (
     <>
       <Upload
-        /*  action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload" */
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
         accept="image/png, image/jpeg"
-        customRequest={(data) => uploadImgBB(data, destination)}
+        customRequest={(data) => getImageData(data)}
       >
         {fileList.length >= 1 ? null : uploadButton}
       </Upload>

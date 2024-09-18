@@ -9,11 +9,12 @@ import {
 } from "antd";
 import Editor from "../../../../components/Editor";
 import { ImageUploader } from "../../../../components/ImageUploader";
-import { useCreateNewsArt } from "../../../../hooks/useNews";
+import { useGetNewsArt, useUpdateNewsArt } from "../../../../hooks/useNews";
 
 type Props = {
   onClose: () => void;
   open: boolean;
+  updateId: number;
 };
 
 type FieldType = {
@@ -22,18 +23,23 @@ type FieldType = {
   imageId: number;
 };
 
-export const DrawerAdd = ({ onClose, open }: Props) => {
-  const { mutate } = useCreateNewsArt();
+export const DrawerEdit = ({ onClose, open, updateId }: Props) => {
+  const { mutate } = useUpdateNewsArt();
+
+  const { data } = useGetNewsArt();
+
+  const initialValue = data?.rows.find((item => item.id === updateId));
+
+  console.log(initialValue);
 
   const [form] = Form.useForm();
 
   const handleClose = () => {
     onClose();
-    form.resetFields();
   }
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
-    mutate(values);
+    mutate({ ...values, id: updateId });
     handleClose()
   };
 
@@ -47,7 +53,7 @@ export const DrawerAdd = ({ onClose, open }: Props) => {
 
   return (
     <Drawer
-      title="Добавить новость АРТ"
+      title="Обновить новость АРТ"
       onClose={handleClose}
       open={open}
       size={"large"}
@@ -59,6 +65,7 @@ export const DrawerAdd = ({ onClose, open }: Props) => {
           autoComplete="off"
           layout="vertical"
           form={form}
+          initialValues={initialValue}
         >
           <Form.Item<FieldType>
             label={
@@ -80,7 +87,7 @@ export const DrawerAdd = ({ onClose, open }: Props) => {
             name="bodyText"
             rules={[{ required: true, message: "Заполните обязательное поле" }]}
           >
-            <Editor initData="" onChange={onChangeEditor} />
+            <Editor initData={initialValue?.bodyText || ''} onChange={onChangeEditor} />
           </Form.Item>
           <Form.Item<FieldType>
             label={
@@ -94,6 +101,7 @@ export const DrawerAdd = ({ onClose, open }: Props) => {
             <ImageUploader
               onChange={onChangeImageUploader}
               destination="novosti-art"
+              initialPath={initialValue?.storage_image.imagePath}
             />
           </Form.Item>
           <Divider className="mt-7 mb-7" />

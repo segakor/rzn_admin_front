@@ -17,10 +17,9 @@ export const useLogin = () => {
     },
     onError: (err: any) => {
       notification.error({
-        message: err.statusText,
+        message: err?.data?.message || err.statusText,
         duration: 10,
       });
-      console.log(err);
     },
   });
 };

@@ -28,7 +28,7 @@ export const LoginPage = () => {
               fill="none"
               viewBox="0 0 69 66"
             >
-              <g clip-path="url(#a)">
+              <g clipPath="url(#a)">
                 <path
                   fill="#B0EC4F"
                   stroke="#B0EC4F"
@@ -47,7 +47,6 @@ export const LoginPage = () => {
         <div className="text-lg mb-3 text-center">Вход</div>
         <Form
           name="login"
-          initialValues={{ remember: true }}
           onFinish={onFinish}
           autoComplete="off"
         >
