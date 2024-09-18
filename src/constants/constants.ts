@@ -4,3 +4,8 @@ export const dictElment = {
   LONG_READ_ITEM_BLOCK: "Подраздел",
   TEXT_BLOCK: "Текстовый блок",
 };
+
+export const fileDestination = {
+  NOVOSTI_ART: "novosti-art",
+  NOVOSTI_REGION: "novosti-region",
+};

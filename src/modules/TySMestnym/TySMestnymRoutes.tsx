@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 
 export const TySMestnymRoutes = () => {
   const Cit = lazy(() => import("./Cit"));
-  const NovostyRegiona = lazy(() => import("./NovostyRegiona"));
+  const NovostyRegiona = lazy(() => import("./NovostiRegiona"));
   const OtvetyNaVoprosy = lazy(() => import("./OtvetyNaVoprosy"));
   const ObratnayaSvyaz = lazy(() => import("./ObratnayaSvyaz"));
   const MobilnoePrilozhenie = lazy(() => import("./MobilnoePrilozhenie"));
@@ -22,7 +22,7 @@ export const TySMestnymRoutes = () => {
             }
           />
           <Route
-            path="novosty-regiona"
+            path="novosti-regiona"
             element={
               <Suspense fallback={<Spin />}>
                 <NovostyRegiona />

@@ -9,7 +9,8 @@ import {
 } from "antd";
 import Editor from "../../../../components/Editor";
 import { ImageUploader } from "../../../../components/ImageUploader";
-import { useGetNewsArt, useUpdateNewsArt } from "../../../../hooks/useNews";
+import { useGetNewsArt, useUpdateNewsArt } from "../../../../hooks/useNewsArt";
+import { fileDestination } from "../../../../constants/constants";
 
 type Props = {
   onClose: () => void;
@@ -100,7 +101,7 @@ export const DrawerEdit = ({ onClose, open, updateId }: Props) => {
           >
             <ImageUploader
               onChange={onChangeImageUploader}
-              destination="novosti-art"
+              destination={fileDestination.NOVOSTI_ART}
               initialPath={initialValue?.storage_image.imagePath}
             />
           </Form.Item>

@@ -42,20 +42,6 @@ export const menuItems = [
     ],
   },
   {
-    key: "Инфо-центр",
-    label: "Инфо-центр",
-    children: [
-      { label: "Визит центр для туристов", key: "/ty-s-mestnym/cit" },
-      { label: "Новости региона", key: "/ty-s-mestnym/novosty-regiona" },
-      { label: "Ответы на вопросы", key: "/ty-s-mestnym/otvety-na-voprosy" },
-      { label: "Ваши отзывы", key: "/ty-s-mestnym/obratnaya-svyaz" },
-      {
-        label: "Мобильное приложение",
-        key: "/ty-s-mestnym/mobilnoe-prilozhenie",
-      },
-    ],
-  },
-  {
     key: "Маршруты",
     label: "Маршруты",
     children: [
@@ -66,6 +52,20 @@ export const menuItems = [
       {
         label: "Самостоятельные машруты",
         key: "/marshruty/samostoyatelnye-marshruty",
+      },
+    ],
+  },
+  {
+    key: "Туристам",
+    label: "Туристам",
+    children: [
+      { label: "Визит центр для туристов", key: "/ty-s-mestnym/cit" },
+      { label: "Новости региона", key: "/ty-s-mestnym/novosti-regiona" },
+      { label: "Ответы на вопросы", key: "/ty-s-mestnym/otvety-na-voprosy" },
+      { label: "Ваши отзывы", key: "/ty-s-mestnym/obratnaya-svyaz" },
+      {
+        label: "Мобильное приложение",
+        key: "/ty-s-mestnym/mobilnoe-prilozhenie",
       },
     ],
   },

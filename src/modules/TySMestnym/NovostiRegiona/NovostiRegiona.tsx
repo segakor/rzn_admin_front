@@ -1,5 +1,4 @@
 import { Button, notification, Table } from "antd";
-import { useDeleteNewsArt, useGetNewsArt } from "../../../hooks/useNewsArt";
 import { TNewsArt } from "../../../api/newsArt";
 import { ButtonAction } from "./components/ButtonAction";
 import { useEffect, useState } from "react";
@@ -7,9 +6,10 @@ import { DrawerAdd } from "./components/DrawerAdd";
 import { ModalView } from "./components/ModalView";
 import { DrawerEdit } from "./components/DrawerEdit";
 import { ModalConfirmation } from "../../../components/ModalConfirmation";
+import { useGetNewsRegion, useDeleteNewsRegion } from "../../../hooks";
 
-export const NovostiArt = () => {
-  const { isLoading, data, isError } = useGetNewsArt();
+export const NovostiRegiona = () => {
+  const { isLoading, data, isError } = useGetNewsRegion();
 
   useEffect(() => {
     if (isError) {
@@ -20,7 +20,7 @@ export const NovostiArt = () => {
     }
   }, [isError]);
 
-  const { mutate: deleteNews } = useDeleteNewsArt();
+  const { mutate: deleteNews } = useDeleteNewsRegion();
 
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
 
@@ -107,7 +107,7 @@ export const NovostiArt = () => {
   return (
     <div className="grid gap-3">
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-medium">Новости АРТ</h1>
+        <h1 className="text-xl font-medium">Новости Региона</h1>
         <Button size="large" type="primary" onClick={onOpen}>
           Добавить запись
         </Button>
