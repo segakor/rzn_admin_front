@@ -9,8 +9,9 @@ import {
 } from "antd";
 import Editor from "../../../../components/Editor";
 import { ImageUploader } from "../../../../components/ImageUploader";
-import { useGetNewsArt, useUpdateNewsArt } from "../../../../hooks/useNewsArt";
+import { useGetNewsArt } from "../../../../hooks/useNewsArt";
 import { fileDestination } from "../../../../constants/constants";
+import { useUpdateNewsRegion } from "../../../../hooks";
 
 type Props = {
   onClose: () => void;
@@ -25,7 +26,7 @@ type FieldType = {
 };
 
 export const DrawerEdit = ({ onClose, open, updateId }: Props) => {
-  const { mutate } = useUpdateNewsArt();
+  const { mutate } = useUpdateNewsRegion();
 
   const { data } = useGetNewsArt();
 

@@ -9,8 +9,8 @@ import {
 } from "antd";
 import Editor from "../../../../components/Editor";
 import { ImageUploader } from "../../../../components/ImageUploader";
-import { useCreateNewsArt } from "../../../../hooks/useNewsArt";
 import { fileDestination } from "../../../../constants/constants";
+import { useCreateNewsRegion } from "../../../../hooks";
 
 type Props = {
   onClose: () => void;
@@ -24,7 +24,7 @@ type FieldType = {
 };
 
 export const DrawerAdd = ({ onClose, open }: Props) => {
-  const { mutate } = useCreateNewsArt();
+  const { mutate } = useCreateNewsRegion();
 
   const [form] = Form.useForm();
 
