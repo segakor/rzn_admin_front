@@ -11,7 +11,6 @@ import {
 import Editor from "../../../../components/Editor";
 import { ImageUploader } from "../../../../components/ImageUploader";
 import { dateFormat, fileDestination } from "../../../../constants/constants";
-import { Moment } from "moment";
 import dayjs from 'dayjs';
 import { useGetNewsRegion, useUpdateNewsRegion } from "../../../../hooks";
 
@@ -25,7 +24,7 @@ type FieldType = {
   title: string;
   bodyText: string;
   imageId: number;
-  date: Moment;
+  date: dayjs.Dayjs;
 };
 
 export const DrawerEdit = ({ onClose, open, updateId }: Props) => {
