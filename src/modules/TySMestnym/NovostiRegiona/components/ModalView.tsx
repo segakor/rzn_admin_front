@@ -24,7 +24,7 @@ export const ModalView = ({ isOpen, onClose, viewNews }: Props) => {
           className="rounded-2xl"
           src={getImageUrl(viewNews?.storage_image?.imagePath)}
         />
-        <div className="text-md text-right">{new Date(viewNews?.createdAt).toLocaleString('ru-RU', { dateStyle: 'short', })}</div>
+        <div className="text-md text-right">{new Date(viewNews?.date).toLocaleString('ru-RU', { dateStyle: 'short', })}</div>
         <div className="text-2xl">{viewNews?.title}</div>
         <div
           className="whitespace-pre-line text-md"

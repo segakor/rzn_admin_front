@@ -9,3 +9,7 @@ export const fileDestination = {
   NOVOSTI_ART: "novosti-art",
   NOVOSTI_REGION: "novosti-region",
 };
+
+
+
+export const dateFormat = "DD-MM-YYYY";

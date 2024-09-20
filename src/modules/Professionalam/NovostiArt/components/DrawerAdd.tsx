@@ -1,5 +1,6 @@
 import {
   Button,
+  DatePicker,
   Divider,
   Drawer,
   Form,
@@ -10,7 +11,8 @@ import {
 import Editor from "../../../../components/Editor";
 import { ImageUploader } from "../../../../components/ImageUploader";
 import { useCreateNewsArt } from "../../../../hooks/useNewsArt";
-import { fileDestination } from "../../../../constants/constants";
+import { dateFormat, fileDestination } from "../../../../constants/constants";
+import dayjs, { Dayjs } from "dayjs";
 
 type Props = {
   onClose: () => void;
@@ -21,6 +23,7 @@ type FieldType = {
   title: string;
   bodyText: string;
   imageId: number;
+  date: Dayjs;
 };
 
 export const DrawerAdd = ({ onClose, open }: Props) => {
@@ -31,11 +34,11 @@ export const DrawerAdd = ({ onClose, open }: Props) => {
   const handleClose = () => {
     onClose();
     form.resetFields();
-  }
+  };
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
-    mutate(values);
-    handleClose()
+    mutate({ ...values, date: values.date.format() });
+    handleClose();
   };
 
   const onChangeEditor = (e: string) => {
@@ -57,7 +60,6 @@ export const DrawerAdd = ({ onClose, open }: Props) => {
         <Form
           name="newsArt"
           onFinish={onFinish}
-          autoComplete="off"
           layout="vertical"
           form={form}
         >
@@ -86,6 +88,18 @@ export const DrawerAdd = ({ onClose, open }: Props) => {
           <Form.Item<FieldType>
             label={
               <Typography.Title className="!m-0" level={5}>
+                Дата
+              </Typography.Title>
+            }
+            name="date"
+            rules={[{ required: true, message: "Заполните обязательное поле" }]}
+            initialValue={dayjs(new Date())}
+          >
+            <DatePicker size="large" format={dateFormat} />
+          </Form.Item>
+          <Form.Item<FieldType>
+            label={
+              <Typography.Title className="!m-0" level={5}>
                 Изображение
               </Typography.Title>
             }
@@ -99,11 +113,7 @@ export const DrawerAdd = ({ onClose, open }: Props) => {
           </Form.Item>
           <Divider className="mt-7 mb-7" />
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              size="large"
-            >
+            <Button type="primary" htmlType="submit" size="large">
               Сохранить
             </Button>
           </Form.Item>

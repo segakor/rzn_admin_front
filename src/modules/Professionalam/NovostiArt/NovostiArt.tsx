@@ -1,15 +1,20 @@
 import { Button, notification, Table } from "antd";
 import { useDeleteNewsArt, useGetNewsArt } from "../../../hooks/useNewsArt";
 import { TNewsArt } from "../../../api/newsArt";
-import { ButtonAction } from "./components/ButtonAction";
 import { useEffect, useState } from "react";
 import { DrawerAdd } from "./components/DrawerAdd";
 import { ModalView } from "./components/ModalView";
 import { DrawerEdit } from "./components/DrawerEdit";
 import { ModalConfirmation } from "../../../components/ModalConfirmation";
+import { ButtonAction } from "../../../components/ButtonGroup";
 
 export const NovostiArt = () => {
   const { isLoading, data, isError } = useGetNewsArt();
+
+  const dataSource = data?.rows.map((item, index) => ({
+    ...item,
+    key: index + 1,
+  }));
 
   useEffect(() => {
     if (isError) {
@@ -29,6 +34,7 @@ export const NovostiArt = () => {
   const [editDrawerData, setEditDrawerData] = useState({
     isOpen: false,
     updateId: -1,
+    unmound: true,
   });
 
   const [modalConfirmData, setModalConfirmData] = useState({
@@ -45,11 +51,19 @@ export const NovostiArt = () => {
   };
 
   const onOpenEdit = (updateId: number) => {
-    setEditDrawerData((prev) => ({ ...prev, isOpen: true, updateId }));
+    setEditDrawerData((prev) => ({
+      ...prev,
+      isOpen: true,
+      updateId,
+      unmound: false,
+    }));
   };
 
   const onCloseEdit = () => {
     setEditDrawerData((prev) => ({ ...prev, isOpen: false, updateId: -1 }));
+    setTimeout(() => {
+      setEditDrawerData((prev) => ({ ...prev, unmound: true }));
+    }, 1000);
   };
 
   const onOpenModal = (openedId: number) => {
@@ -68,9 +82,8 @@ export const NovostiArt = () => {
 
   const columns = [
     {
-      title: "id",
-      dataIndex: "id",
-      key: "id",
+      title: "#",
+      dataIndex: "key",
       width: "5%",
     },
     {
@@ -78,7 +91,7 @@ export const NovostiArt = () => {
       render: (row: TNewsArt) => {
         return (
           <div>
-            {new Date(row.createdAt).toLocaleString("ru-RU", {
+            {new Date(row.date).toLocaleString("ru-RU", {
               dateStyle: "short",
             })}
           </div>
@@ -113,14 +126,21 @@ export const NovostiArt = () => {
         </Button>
       </div>
       <div className=" bg-slate-100 p-5">
-        <Table dataSource={data?.rows} columns={columns} loading={isLoading} />
+        <Table
+          dataSource={dataSource}
+          columns={columns}
+          loading={isLoading}
+          pagination={{ pageSize: 25 }}
+        />
       </div>
       <DrawerAdd open={isOpenDrawer} onClose={onClose} />
-      <DrawerEdit
-        open={editDrawerData.isOpen}
-        onClose={onCloseEdit}
-        updateId={editDrawerData.updateId}
-      />
+      {!editDrawerData.unmound && (
+        <DrawerEdit
+          open={editDrawerData.isOpen}
+          onClose={onCloseEdit}
+          updateId={editDrawerData.updateId}
+        />
+      )}
       <ModalView
         isOpen={modalData.isOpen}
         onClose={onCloseModal}

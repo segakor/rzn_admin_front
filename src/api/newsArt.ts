@@ -5,8 +5,7 @@ export type TNewsArt = {
   id: number;
   title: string;
   bodyText: string;
-  createdAt: string;
-  updatedAt: string;
+  date: string;
   storage_image: {
     imagePath: string;
   }
@@ -16,6 +15,7 @@ export type TCreateNewsArt = {
   title: string;
   bodyText: string;
   imageId: number;
+  date: string
 };
 
 export const getNewsArt = async () => {

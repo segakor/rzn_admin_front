@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createNewsRegion, deleteNewsRegion, getNewsRegion, TCreateNewsRegion, updateNewsRegion } from "../api/newsRegion";
+import { createNewsRegion, deleteNewsRegion, getNewsRegion, updateNewsRegion } from "../api/newsRegion";
 import { notification } from "antd";
+import { TCreateNewsArt } from "../api/newsArt";
 
 const GET_NEWS_REGION = "GET_NEWS_REGION";
 
@@ -26,7 +27,7 @@ export const useCreateNewsRegion = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (body: TCreateNewsRegion) => createNewsRegion(body),
+    mutationFn: (body: TCreateNewsArt) => createNewsRegion(body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [GET_NEWS_REGION] });
       notification.success({
@@ -48,7 +49,7 @@ export const useUpdateNewsRegion = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (body: TCreateNewsRegion & { id: number }) => updateNewsRegion(body),
+    mutationFn: (body: TCreateNewsArt & { id: number }) => updateNewsRegion(body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [GET_NEWS_REGION] });
       notification.success({
