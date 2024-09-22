@@ -119,7 +119,7 @@ export const NovostiRegiona = () => {
         </Button>
       </div>
       <div className=" bg-slate-100 p-5">
-        <Table dataSource={dataSource} columns={columns} loading={isLoading} pagination={{ pageSize: 25 }} />
+        <Table dataSource={dataSource} columns={columns} loading={isLoading} /* pagination={{ pageSize: 25 }} */ />
       </div>
       <DrawerAdd open={isOpenDrawer} onClose={onClose} />
       {!editDrawerData.unmound && <DrawerEdit

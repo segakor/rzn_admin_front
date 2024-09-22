@@ -14,3 +14,7 @@ export const login = async ({
     })
   ).data;
 };
+
+export const checkAuth = async () => {
+  return (await axiosClient.get(`/me`)).data;
+};

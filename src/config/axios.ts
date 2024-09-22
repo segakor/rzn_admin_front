@@ -6,6 +6,7 @@ export const axiosClient = axios;
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 axiosClient.defaults.baseURL = BASE_URL + '/api-v2';
+axiosClient.defaults.withCredentials = true;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 axiosClient.interceptors.request.use((config: any) => {
@@ -28,8 +29,7 @@ axiosClient.interceptors.response.use(
       if (error.response.status === 403) {
         tokenService.removeJwtToken();
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
-        window.location.reload(false);
+        window.location.href = '/login';
       }
       return Promise.reject(error.response);
     }

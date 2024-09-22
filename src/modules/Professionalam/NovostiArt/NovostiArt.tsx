@@ -130,7 +130,7 @@ export const NovostiArt = () => {
           dataSource={dataSource}
           columns={columns}
           loading={isLoading}
-          pagination={{ pageSize: 25 }}
+        /* pagination={{ pageSize: 25 }} */
         />
       </div>
       <DrawerAdd open={isOpenDrawer} onClose={onClose} />

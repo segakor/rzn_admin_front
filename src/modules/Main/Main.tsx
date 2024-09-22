@@ -6,8 +6,14 @@ import { ProfessionalamRoutes } from "../Professionalam/ProfessionalamRoutes";
 import { RegionRoutes } from "../Region/RegionRoutes";
 import { TySMestnymRoutes } from "../TySMestnym/TySMestnymRoutes";
 import { MainRoutes } from "./MainRoutes";
+import { useLocation } from "react-router";
+import { useCheckAuth } from "../../hooks";
 
 export const Main = () => {
+  const location = useLocation();
+
+  useCheckAuth(location.pathname);
+
   return (
     <LayoutComponent>
       <MainRoutes />

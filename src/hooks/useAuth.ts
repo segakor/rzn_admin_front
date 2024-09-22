@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useMutation } from "@tanstack/react-query";
-import { login } from "../api/auth";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { checkAuth, login } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { tokenService } from "../service/tokenService";
 import { notification } from "antd";
+
+const GET_CHECK_AUTH = 'GET_CHECK_AUTH'
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -36,3 +38,11 @@ export const useLogout = () => {
     logount,
   };
 };
+
+
+export const useCheckAuth = (location: string) => {
+  return useQuery({
+    queryKey: [GET_CHECK_AUTH, location],
+    queryFn: () => checkAuth(),
+  });
+}
