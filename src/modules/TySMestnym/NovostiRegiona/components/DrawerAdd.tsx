@@ -108,7 +108,7 @@ export const DrawerAdd = ({ onClose, open }: Props) => {
           >
             <ImageUploader
               onChange={onChangeImageUploader}
-              destination={fileDestination.NOVOSTI_ART}
+              destination={fileDestination.NOVOSTI_REGION}
             />
           </Form.Item>
           <Divider className="mt-7 mb-7" />

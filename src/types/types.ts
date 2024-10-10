@@ -11,13 +11,16 @@ export enum ELEMENT_TYPE {
   LINK_BLOCK = "LINK_BLOCK",
 }
 
-export type TTemplate = {
+export type TTemplateChild = {
+  childId: number,
   element: ELEMENT_TYPE;
-  subElements?: {
-    element: ELEMENT_TYPE;
-    text?: string;
-    srcImg?: string;
-  }[];
+  text?: string;
+  srcImg?: string;
+}
+export type TTemplate = {
+  parentId: number;
+  element: ELEMENT_TYPE;
+  subElements?: TTemplateChild[];
   title?: string;
   text?: string;
   srcImg?: string;
@@ -34,3 +37,11 @@ export type TResponseTableData<T> = {
   count: number;
   rows: T;
 };
+
+
+export enum SUB_ELEMENT_TYPE {
+  TEXT_BLOCK = "TEXT_BLOCK",
+  LONG_READ_ITEM_BLOCK = "LONG_READ_ITEM_BLOCK",
+  LINK_BLOCK = "LINK_BLOCK",
+  FACT_BLOCK = "FACT_BLOCK",
+}

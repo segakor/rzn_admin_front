@@ -6,3 +6,17 @@ a {
   color: rgb(79, 105, 250);
   text-decoration: underline;
 }
+
+.grid_layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  gap: 80px;
+  padding: 0 10px;
+}
+#cke_editor1 {
+  min-height: 700px !important;
+}
+#cke_1_contents {
+  min-height: 600px !important;
+}

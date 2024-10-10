@@ -115,7 +115,7 @@ export const DrawerEdit = ({ onClose, open, updateId }: Props) => {
           >
             <ImageUploader
               onChange={onChangeImageUploader}
-              destination={fileDestination.NOVOSTI_ART}
+              destination={fileDestination.NOVOSTI_REGION}
               initialPath={initialValues?.storage_image?.imagePath}
             />
           </Form.Item>
