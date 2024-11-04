@@ -1,4 +1,4 @@
-import { Alert, Button, Form, FormProps } from "antd";
+import { Button, Form, FormProps } from "antd";
 import {
   useCreateLongRead,
   useGetLongRead,
@@ -34,23 +34,6 @@ export const LongreadEditor = ({ longreadTitle }: Props) => {
 
   return (
     <div>
-      <div className="mb-3">
-        <Alert
-          description={
-            <div>
-              Для построение блоков используйте классы контейнеров
-              <ul>
-                <li>
-                  item ---- bg-white md:p-[50px] p-[30px] rounded-[30px] grid gap-7
-                  shadow-md
-                </li>
-              </ul>
-            </div>
-          }
-          type="info"
-          showIcon
-        />
-      </div>
       {!data?.bodyText && !isLoading && (
         <div>
           <Button

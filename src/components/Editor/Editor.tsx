@@ -2,7 +2,7 @@
 import { CKEditor } from "ckeditor4-react";
 import { tokenService } from "../../service/tokenService";
 import { axiosClient } from "../../config";
-import { configToolbarEditor } from "../../constants/constants";
+import { configStylesSet, configToolbar } from "../../constants/editor";
 import "../../index.css";
 
 type Props = {
@@ -22,12 +22,10 @@ export const Editor = ({
     onChange(value.editor.getData());
   };
 
-  const toolbar = isLongRead
-    ? configToolbarEditor.longread
-    : configToolbarEditor.default;
+  const toolbar = isLongRead ? configToolbar.longread : configToolbar.default;
 
   return (
-    <div className="App">
+    <div className="editor">
       <CKEditor
         config={{
           versionCheck: false,
@@ -39,14 +37,10 @@ export const Editor = ({
           filebrowserUploadUrl: `${axiosClient.getUri()}/upload/longread?destination=${destination}`,
           removeDialogTabs:
             "image:Link;image:advanced;link:upload;link:advanced",
-          stylesSet: [
-            {
-              name: "RZN_Emphasis",
-              element: "div",
-              styles: { "font-style": "italic" },
-              attributes: { class: "RZN_Emphasis" },
-            },
-          ],
+          stylesSet: configStylesSet,
+          contentsCss:
+            ".cke_editable img { max-width: 800px !important; border-radius: 30px !important ;height: auto !important; }",
+          image_prefillDimensions: false,
         }}
         initData={initData}
         onChange={inputHandler}

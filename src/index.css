@@ -20,3 +20,7 @@ a {
 #cke_1_contents {
   min-height: 600px !important;
 }
+
+.cke_editable img {
+  border: 1px solid red !important;
+}

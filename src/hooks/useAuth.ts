@@ -18,8 +18,9 @@ export const useLogin = () => {
       navigate("/main");
     },
     onError: (err: any) => {
+      console.log(err)
       notification.error({
-        message: err?.data?.message || err.statusText,
+        message: err?.data?.message || err.statusText || 'Error',
         duration: 10,
       });
     },

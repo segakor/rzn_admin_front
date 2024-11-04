@@ -3,7 +3,9 @@ import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
 export const IdeiDlyaPuteshestviyaRoutes = () => {
-  const ChtoPosmotret = lazy(() => import("./ChtoPosmotret"));
+  const ChtoPosmotret = lazy(() => import("./ChtoPosmotret/pages/ChtoPosmotret"));
+  const ChtoPosmotretAdd = lazy(() => import("./ChtoPosmotret/pages/ChtoPosmotretAdd"));
+  const ChtoPosmotretEdit = lazy(() => import("./ChtoPosmotret/pages/ChtoPosmotretEdit"));
   const Informer = lazy(() => import("./Informer"));
 
   return (
@@ -14,7 +16,23 @@ export const IdeiDlyaPuteshestviyaRoutes = () => {
             path="chto-posmotret"
             element={
               <Suspense fallback={<Spin />}>
-                <ChtoPosmotret/>
+                <ChtoPosmotret />
+              </Suspense>
+            }
+          />
+          <Route
+            path="chto-posmotret/add"
+            element={
+              <Suspense fallback={<Spin />}>
+                <ChtoPosmotretAdd />
+              </Suspense>
+            }
+          />
+          <Route
+            path="chto-posmotret/edit/:id"
+            element={
+              <Suspense fallback={<Spin />}>
+                <ChtoPosmotretEdit />
               </Suspense>
             }
           />
