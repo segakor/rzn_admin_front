@@ -10,6 +10,7 @@ import {
 } from "../../../../constants/constants";
 import Editor from "../../../../components/Editor";
 import { ImageUploader } from "../../../../components/ImageUploader";
+const { TextArea } = Input;
 
 type FieldType = TCreateChtoPosmotret & {
   id: string;
@@ -111,16 +112,13 @@ export const FormChtoPosmotret = ({ onFinish, initialValue }: Props) => {
       <Form.Item<FieldType>
         label={
           <Typography.Title className="!m-0" level={5}>
-            Контакты
+            Контакты (перенос строки через Enter)
           </Typography.Title>
         }
         name="contacts"
         rules={[{ required: true, message: "Заполните обязательное поле" }]}
       >
-        <Editor
-          initData={initialValue?.contacts || ""}
-          onChange={onChangeEditor}
-        />
+        <TextArea rows={4} />
       </Form.Item>
       <Form.Item<FieldType>
         label={

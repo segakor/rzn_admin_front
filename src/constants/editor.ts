@@ -36,7 +36,7 @@ export const configToolbar = {
     ],
     ["Image"],
     "/",
-    ["Source", "Preview", "Find", "ShowBlocks"],
+    ["Source", /* "Preview", */ "Find", "ShowBlocks"],
   ],
 };
 
