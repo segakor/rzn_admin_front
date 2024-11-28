@@ -54,7 +54,7 @@ export const configStylesSet = [
     element: "div",
     attributes: {
       class:
-        "factBlock p-[30px] bg-[#5363f7] rounded-[30px] text-white before:content-[url('/factBlock/fact.svg')] flex gap-3 items-center",
+        "factBlock p-[30px] bg-[#5363f7] rounded-[30px] text-white before:content-[url('/factBlock/fact.svg')] grid gap-3 items-center",
     },
   },
   {
@@ -62,15 +62,7 @@ export const configStylesSet = [
     element: "div",
     attributes: {
       class:
-        "quoteBlock p-[30px] bg-[#252525] text-white rounded-[30px] before:content-[url('/quoteBlock/quote.svg')] flex gap-3",
-    },
-  },
-  {
-    name: "linkBlock",
-    element: "div",
-    attributes: {
-      class:
-        "linkBlock p-[30px] bg-[#f5f5f5] rounded-[30px] cursor-pointer hover:bg-[var(--color-green)] transition-all",
+        "quoteBlock p-[30px] bg-[#252525] text-white rounded-[30px] before:content-[url('/quoteBlock/quote.svg')] grid gap-3",
     },
   },
 ];

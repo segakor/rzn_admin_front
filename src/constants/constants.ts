@@ -9,6 +9,7 @@ export const fileDestination = {
   NOVOSTI_ART: "novosti-art",
   NOVOSTI_REGION: "novosti-region",
   CHTO_POSMOTRET: "chto-posmotret",
+  SAMOSTOYATELNYE_MARSHRUTY: "samostoyatelnye_marshruty",
 };
 
 export const longredIitle = {
@@ -31,6 +32,11 @@ export const tabsChtoPosmotret = [
   { label: "Театры", value: "Театры" },
 ];
 
+export const tabsSamostoyatelnyeMarshruty = [
+  { label: "Однодневные", value: "Однодневные" },
+  { label: "Многодневные", value: "Многодневные" },
+];
+
 export const tags = [
   { label: "vegan", value: 1 },
   { label: "zavtrak", value: 2 },
@@ -42,4 +48,10 @@ export const tags = [
   { label: "priroda", value: 8 },
   { label: "rekomenduem", value: 9 },
   { label: "program", value: 10 },
-]
+];
+
+export const tagsSamostoyatelnyeMarshruty = [
+  { label: "peshkom", value: 11 },
+  { label: "avto", value: 12 },
+  { label: "colab", value: 13 },
+];
