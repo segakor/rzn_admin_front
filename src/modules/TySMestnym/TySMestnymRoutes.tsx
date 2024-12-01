@@ -5,7 +5,9 @@ import { Route, Routes } from "react-router-dom";
 export const TySMestnymRoutes = () => {
   const Cit = lazy(() => import("./Cit"));
   const NovostyRegiona = lazy(() => import("./NovostiRegiona"));
-  const OtvetyNaVoprosy = lazy(() => import("./OtvetyNaVoprosy"));
+  const OtvetyNaVoprosy = lazy(() => import("./OtvetyNaVoprosy/pages/OtvetyNaVoprosy"));
+  const OtvetyNaVoprosyAdd = lazy(() => import("./OtvetyNaVoprosy/pages/OtvetyNaVoprosyAdd"));
+  const OtvetyNaVoprosyEdit = lazy(() => import("./OtvetyNaVoprosy/pages/OtvetyNaVoprosyEdit"));
   const ObratnayaSvyaz = lazy(() => import("./ObratnayaSvyaz"));
   const MobilnoePrilozhenie = lazy(() => import("./MobilnoePrilozhenie"));
 
@@ -34,6 +36,22 @@ export const TySMestnymRoutes = () => {
             element={
               <Suspense fallback={<Spin />}>
                 <OtvetyNaVoprosy />
+              </Suspense>
+            }
+          />
+          <Route
+            path="otvety-na-voprosy/add"
+            element={
+              <Suspense fallback={<Spin />}>
+                <OtvetyNaVoprosyAdd />
+              </Suspense>
+            }
+          />
+          <Route
+            path="otvety-na-voprosy/edit/:id"
+            element={
+              <Suspense fallback={<Spin />}>
+                <OtvetyNaVoprosyEdit />
               </Suspense>
             }
           />

@@ -37,6 +37,14 @@ export const tabsSamostoyatelnyeMarshruty = [
   { label: "Многодневные", value: "Многодневные" },
 ];
 
+export const tabsOtvetyNaVoprosy = [
+  { label: "Транспорт", value: "Транспорт" },
+  { label: "Частные вопросы", value: "Частные вопросы" },
+  { label: "Сувениры", value: "Сувениры" },
+  { label: "Вечер в городе", value: "Вечер в городе" },
+
+]
+
 export const tags = [
   { label: "vegan", value: 1 },
   { label: "zavtrak", value: 2 },
