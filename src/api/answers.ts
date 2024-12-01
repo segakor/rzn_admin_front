@@ -5,11 +5,11 @@ export type TAnswer = {
   id: number;
   title: string;
   category: string;
-  keywords: string[];
+  keywords: string;
   answers: {
     title: string;
     template: string;
-  }
+  }[];
 };
 
 export type TCreateAnswer = Omit<TAnswer, 'id'>
