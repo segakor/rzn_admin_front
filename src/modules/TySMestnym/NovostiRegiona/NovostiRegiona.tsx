@@ -1,6 +1,6 @@
-import { Button, notification, Table } from "antd";
+import { Button, Table } from "antd";
 import { TNewsArt } from "../../../api/newsArt";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DrawerAdd } from "./components/DrawerAdd";
 import { ModalView } from "./components/ModalView";
 import { DrawerEdit } from "./components/DrawerEdit";
@@ -9,21 +9,12 @@ import { useDeleteNewsRegion, useGetNewsRegion } from "../../../hooks";
 import { ButtonAction } from "../../../components/ButtonGroup";
 
 export const NovostiRegiona = () => {
-  const { isLoading, data, isError } = useGetNewsRegion();
+  const { isLoading, data } = useGetNewsRegion();
 
   const dataSource = data?.rows.map((item, index) => ({
     ...item,
     key: index + 1,
   }));
-
-  useEffect(() => {
-    if (isError) {
-      notification.error({
-        message: "Не удалось загрузить данные",
-        duration: 10,
-      });
-    }
-  }, [isError]);
 
   const { mutate: deleteNews } = useDeleteNewsRegion();
 
@@ -34,7 +25,7 @@ export const NovostiRegiona = () => {
   const [editDrawerData, setEditDrawerData] = useState({
     isOpen: false,
     updateId: -1,
-    unmound: true
+    unmound: true,
   });
 
   const [modalConfirmData, setModalConfirmData] = useState({
@@ -51,12 +42,19 @@ export const NovostiRegiona = () => {
   };
 
   const onOpenEdit = (updateId: number) => {
-    setEditDrawerData((prev) => ({ ...prev, isOpen: true, updateId, unmound: false }));
+    setEditDrawerData((prev) => ({
+      ...prev,
+      isOpen: true,
+      updateId,
+      unmound: false,
+    }));
   };
 
   const onCloseEdit = () => {
     setEditDrawerData((prev) => ({ ...prev, isOpen: false, updateId: -1 }));
-    setTimeout(() => { setEditDrawerData((prev) => ({ ...prev, unmound: true })); }, 1000)
+    setTimeout(() => {
+      setEditDrawerData((prev) => ({ ...prev, unmound: true }));
+    }, 1000);
   };
 
   const onOpenModal = (openedId: number) => {
@@ -119,14 +117,21 @@ export const NovostiRegiona = () => {
         </Button>
       </div>
       <div className=" bg-slate-100 p-5">
-        <Table dataSource={dataSource} columns={columns} loading={isLoading} /* pagination={{ pageSize: 25 }} */ />
+        <Table
+          dataSource={dataSource}
+          columns={columns}
+          loading={isLoading}
+          pagination={{ pageSize: 50 }}
+        />
       </div>
       <DrawerAdd open={isOpenDrawer} onClose={onClose} />
-      {!editDrawerData.unmound && <DrawerEdit
-        open={editDrawerData.isOpen}
-        onClose={onCloseEdit}
-        updateId={editDrawerData.updateId}
-      />}
+      {!editDrawerData.unmound && (
+        <DrawerEdit
+          open={editDrawerData.isOpen}
+          onClose={onCloseEdit}
+          updateId={editDrawerData.updateId}
+        />
+      )}
       <ModalView
         isOpen={modalData.isOpen}
         onClose={onCloseModal}

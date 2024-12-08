@@ -1,6 +1,5 @@
-import { Button, notification, Table, Tag } from "antd";
-import { useEffect, useState } from "react";
-import { ModalConfirmation } from "../../../../../components/ModalConfirmation";
+import { Table, Tag } from "antd";
+import { useState } from "react";
 import {
   useDeleteSamostoyatelnyeMarshruty,
   useGetSamostoyatelnyeMarshruty,
@@ -9,25 +8,18 @@ import { ButtonAction } from "../../../../../components/ButtonGroup";
 import { useNavigate } from "react-router";
 import { tags } from "../../../../../constants/constants";
 import { TSamostoyatelnyeMarshruty } from "../../../../../api/samostoyatelnyeMarshruty";
+import { PageTable } from "../../../../../components/Page";
 
 export const SamostoyatelnyeMarshruty = () => {
-  const { isLoading, data, isError } = useGetSamostoyatelnyeMarshruty();
+  const { isLoading, data } = useGetSamostoyatelnyeMarshruty();
 
   const dataSource = data?.rows.map((item, index) => ({
     ...item,
     key: index + 1,
   }));
 
-  useEffect(() => {
-    if (isError) {
-      notification.error({
-        message: "Не удалось загрузить данные",
-        duration: 10,
-      });
-    }
-  }, [isError]);
-
-  const { mutate: deleteSamostoyatelnyeMarshruty } = useDeleteSamostoyatelnyeMarshruty();
+  const { mutate: deleteSamostoyatelnyeMarshruty } =
+    useDeleteSamostoyatelnyeMarshruty();
 
   const [modalConfirmData, setModalConfirmData] = useState({
     isOpen: false,
@@ -105,25 +97,21 @@ export const SamostoyatelnyeMarshruty = () => {
   ];
 
   return (
-    <div className="grid gap-3">
-      <div className="flex justify-between items-center">
-        <h1 className="text-xl font-medium">Самостоятельные маршруты</h1>
-        <Button size="large" type="primary" onClick={handleAdd}>
-          Добавить объект
-        </Button>
-      </div>
-      <div className="bg-slate-100 p-5">
-        <Table
-          dataSource={dataSource}
-          columns={columns}
-          loading={isLoading}
-        />
-      </div>
-      <ModalConfirmation
-        isOpen={modalConfirmData.isOpen}
-        onClose={onCloseModalConfirm}
-        onConfirm={() => deleteSamostoyatelnyeMarshruty(modalConfirmData.deletedId)}
+    <PageTable
+      title={"Самостоятельные маршруты"}
+      handleAdd={handleAdd}
+      isOpenModalConfirmation={modalConfirmData.isOpen}
+      onCloseModalConfirmation={onCloseModalConfirm}
+      onConfirmModalConfirm={() =>
+        deleteSamostoyatelnyeMarshruty(modalConfirmData.deletedId)
+      }
+    >
+      <Table
+        dataSource={dataSource}
+        columns={columns}
+        loading={isLoading}
+        pagination={{ pageSize: 50 }}
       />
-    </div>
+    </PageTable>
   );
 };

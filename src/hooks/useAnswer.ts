@@ -16,7 +16,16 @@ const GET_ANSWER_DETAIL = "GET_ANSWER_DETAIL";
 export const useGetAnswer = () => {
   return useQuery({
     queryKey: [GET_ANSWER],
-    queryFn: () => getAnswer(),
+    queryFn: async () => {
+      try {
+        return await getAnswer();
+      } catch {
+        notification.error({
+          message: "Не удалось загрузить данные",
+          duration: 10,
+        });
+      }
+    },
     staleTime: 0,
     gcTime: 0,
   });
@@ -66,8 +75,7 @@ export const useUpdateAnswer = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (body: TAnswer) =>
-      updateAnswer(body),
+    mutationFn: (body: TAnswer) => updateAnswer(body),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: [GET_ANSWER_DETAIL],

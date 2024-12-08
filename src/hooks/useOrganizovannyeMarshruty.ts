@@ -1,24 +1,25 @@
+import { format, startOfDay } from "date-fns";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  getSamostoyatelnyeMarshruty,
-  deleteSamostoyatelnyeMarshruty,
-  createSamostoyatelnyeMarshruty,
-  TCreateSamostoyatelnyeMarshruty,
-  updateSamostoyatelnyeMarshruty,
-  getSamostoyatelnyeMarshrutyDetail,
-} from "../api/samostoyatelnyeMarshruty";
 import { notification } from "antd";
+import {
+  createOrganizovannyeMarshruty,
+  deleteOrganizovannyeMarshruty,
+  getOrganizovannyeMarshruty,
+  getOrganizovannyeMarshrutyDetail,
+  TCreateOrganizovannyeMarshruty,
+  updateOrganizovannyeMarshruty,
+} from "../api/organizovannyeMarshruty";
 
 const GET_SAMOSTOYATELNYE_MARSHRUTY = "GET_SAMOSTOYATELNYE_MARSHRUTY";
 const GET_SAMOSTOYATELNYE_MARSHRUTY_DETAIL =
   "GET_SAMOSTOYATELNYE_MARSHRUTY_DETAIL";
 
-export const useGetSamostoyatelnyeMarshruty = () => {
+export const useGetOrganizovannyeMarshruty = () => {
   return useQuery({
     queryKey: [GET_SAMOSTOYATELNYE_MARSHRUTY],
     queryFn: async () => {
       try {
-        return await getSamostoyatelnyeMarshruty();
+        return await getOrganizovannyeMarshruty();
       } catch {
         notification.error({
           message: "Не удалось загрузить данные",
@@ -31,18 +32,18 @@ export const useGetSamostoyatelnyeMarshruty = () => {
   });
 };
 
-export const useGetSamostoyatelnyeMarshrutyDetail = (id: string) => {
+export const useGetOrganizovannyeMarshrutyDetail = (id: string) => {
   return useQuery({
     queryKey: [GET_SAMOSTOYATELNYE_MARSHRUTY_DETAIL, id],
-    queryFn: () => getSamostoyatelnyeMarshrutyDetail(id),
+    queryFn: () => getOrganizovannyeMarshrutyDetail(id),
   });
 };
 
-export const useDeleteSamostoyatelnyeMarshruty = () => {
+export const useDeleteOrganizovannyeMarshruty = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (id: number) => deleteSamostoyatelnyeMarshruty(id),
+    mutationFn: (id: number) => deleteOrganizovannyeMarshruty(id),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [GET_SAMOSTOYATELNYE_MARSHRUTY],
@@ -51,12 +52,15 @@ export const useDeleteSamostoyatelnyeMarshruty = () => {
   });
 };
 
-export const useCreateSamostoyatelnyeMarshruty = () => {
+export const useCreateOrganizovannyeMarshruty = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (body: TCreateSamostoyatelnyeMarshruty) =>
-      createSamostoyatelnyeMarshruty(body),
+    mutationFn: (body: TCreateOrganizovannyeMarshruty) =>
+      createOrganizovannyeMarshruty({
+        ...body,
+        dates: body.dates.map((item) => format(startOfDay(item), "yyyy-MM-dd")),
+      }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [GET_SAMOSTOYATELNYE_MARSHRUTY],
@@ -76,12 +80,15 @@ export const useCreateSamostoyatelnyeMarshruty = () => {
   });
 };
 
-export const useUpdateSamostoyatelnyeMarshruty = () => {
+export const useUpdateOrganizovannyeMarshruty = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (body: TCreateSamostoyatelnyeMarshruty & { id: number }) =>
-      updateSamostoyatelnyeMarshruty(body),
+    mutationFn: (body: TCreateOrganizovannyeMarshruty & { id: number }) =>
+      updateOrganizovannyeMarshruty({
+        ...body,
+        dates: body.dates.map((item) => format(startOfDay(item), "yyyy-MM-dd")),
+      }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: [GET_SAMOSTOYATELNYE_MARSHRUTY_DETAIL],

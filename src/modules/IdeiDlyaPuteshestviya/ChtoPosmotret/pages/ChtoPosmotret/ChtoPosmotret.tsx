@@ -1,5 +1,5 @@
-import { Button, notification, Table, Tag } from "antd";
-import { useEffect, useState } from "react";
+import { Button, Table, Tag } from "antd";
+import { useState } from "react";
 import { ModalConfirmation } from "../../../../../components/ModalConfirmation";
 import {
   useGetChtoPosmotret,
@@ -11,21 +11,12 @@ import { TChtoPosmotret } from "../../../../../api/chtoPosmotret";
 import { tags } from "../../../../../constants/constants";
 
 export const ChtoPosmotret = () => {
-  const { isLoading, data, isError } = useGetChtoPosmotret();
+  const { isLoading, data } = useGetChtoPosmotret();
 
   const dataSource = data?.rows.map((item, index) => ({
     ...item,
     key: index + 1,
   }));
-
-  useEffect(() => {
-    if (isError) {
-      notification.error({
-        message: "Не удалось загрузить данные",
-        duration: 10,
-      });
-    }
-  }, [isError]);
 
   const { mutate: deleteChtoPosmotret } = useDeleteChtoPosmotret();
 
@@ -117,6 +108,7 @@ export const ChtoPosmotret = () => {
           dataSource={dataSource}
           columns={columns}
           loading={isLoading}
+          pagination={{ pageSize: 50 }}
         />
       </div>
       <ModalConfirmation

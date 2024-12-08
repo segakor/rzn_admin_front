@@ -1,5 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createNewsRegion, deleteNewsRegion, getNewsRegion, updateNewsRegion } from "../api/newsRegion";
+import {
+  createNewsRegion,
+  deleteNewsRegion,
+  getNewsRegion,
+  updateNewsRegion,
+} from "../api/newsRegion";
 import { notification } from "antd";
 import { TCreateNewsArt } from "../api/newsArt";
 
@@ -8,7 +13,16 @@ const GET_NEWS_REGION = "GET_NEWS_REGION";
 export const useGetNewsRegion = () => {
   return useQuery({
     queryKey: [GET_NEWS_REGION],
-    queryFn: () => getNewsRegion(),
+    queryFn: async () => {
+      try {
+        return await getNewsRegion();
+      } catch {
+        notification.error({
+          message: "Не удалось загрузить данные",
+          duration: 10,
+        });
+      }
+    },
   });
 };
 
@@ -31,9 +45,9 @@ export const useCreateNewsRegion = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [GET_NEWS_REGION] });
       notification.success({
-        message: 'Запись создана',
+        message: "Запись создана",
         duration: 5,
-        placement: 'bottom'
+        placement: "bottom",
       });
     },
     onError: (err: { data: { message: string } }) => {
@@ -49,13 +63,14 @@ export const useUpdateNewsRegion = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (body: TCreateNewsArt & { id: number }) => updateNewsRegion(body),
+    mutationFn: (body: TCreateNewsArt & { id: number }) =>
+      updateNewsRegion(body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [GET_NEWS_REGION] });
       notification.success({
-        message: 'Запись обновлена',
+        message: "Запись обновлена",
         duration: 5,
-        placement: 'bottom'
+        placement: "bottom",
       });
     },
     onError: (err: { data: { message: string } }) => {

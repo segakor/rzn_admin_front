@@ -10,6 +10,7 @@ export const fileDestination = {
   NOVOSTI_REGION: "novosti-region",
   CHTO_POSMOTRET: "chto-posmotret",
   SAMOSTOYATELNYE_MARSHRUTY: "samostoyatelnye_marshruty",
+  ORGANIZOVANNYE_MARSHRUTY: "organizovannye_marshruty",
 };
 
 export const longredIitle = {

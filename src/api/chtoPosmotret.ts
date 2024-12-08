@@ -15,7 +15,10 @@ export type TChtoPosmotret = {
   contacts: string;
 };
 
-export type TCreateChtoPosmotret = Omit<TChtoPosmotret, 'id' | 'storage_image'> & { imageId: string }/* {
+export type TCreateChtoPosmotret = Omit<
+  TChtoPosmotret,
+  "id" | "storage_image"
+> & { imageId: string }; /* {
   title: string;
   subTitle: string;
   address: string;
@@ -26,17 +29,20 @@ export type TCreateChtoPosmotret = Omit<TChtoPosmotret, 'id' | 'storage_image'> 
   contacts: string;
 }; */
 
-export type TUpdateChtoPosmotret = Omit<TChtoPosmotret, 'storage_image'> & { imageId: string }
-
+export type TUpdateChtoPosmotret = Omit<TChtoPosmotret, "storage_image"> & {
+  imageId: string;
+};
 
 export const getChtoPosmotret = async () => {
-  return (await axiosClient.get<TResponseTableData<TChtoPosmotret[]>>(`/chtoposmotret`))
-    .data;
+  return (
+    await axiosClient.get<TResponseTableData<TChtoPosmotret[]>>(
+      `/chtoposmotret`
+    )
+  ).data;
 };
 
 export const getChtoPosmotretDetail = async (id: string) => {
-  return (await axiosClient.get<TChtoPosmotret>(`/chtoposmotret/${id}`))
-    .data;
+  return (await axiosClient.get<TChtoPosmotret>(`/chtoposmotret/${id}`)).data;
 };
 
 export const deleteChtoPosmotret = async (id: number) => {

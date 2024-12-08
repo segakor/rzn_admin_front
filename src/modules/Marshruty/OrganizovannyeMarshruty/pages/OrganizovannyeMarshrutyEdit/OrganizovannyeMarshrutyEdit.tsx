@@ -1,22 +1,19 @@
 import { useLocation, useNavigate, useParams } from "react-router";
-import {
-  useGetSamostoyatelnyeMarshrutyDetail,
-  useUpdateSamostoyatelnyeMarshruty,
-} from "../../../../../hooks";
 import { FormProps, Spin } from "antd";
-import { FormSamostoyatelnyeMarshruty } from "../../form/FormSamostoyatelnyeMarshruty";
-import { TUpdateSamostoyatelnyeMarshruty } from "../../../../../api/samostoyatelnyeMarshruty";
+import { FormOrganizovannyeMarshruty } from "../../form/FormOrganizovannyeMarshruty";
 import { Page } from "../../../../../components/Page";
+import { TUpdateOrganizovannyeMarshruty } from "../../../../../api/organizovannyeMarshruty";
+import { useGetOrganizovannyeMarshrutyDetail, useUpdateOrganizovannyeMarshruty } from "../../../../../hooks/useOrganizovannyeMarshruty";
 
-type FieldType = TUpdateSamostoyatelnyeMarshruty;
+type FieldType = TUpdateOrganizovannyeMarshruty;
 
-export const SamostoyatelnyeMarshrutyEdit = () => {
+export const OrganizovannyeMarshrutyEdit = () => {
   const { state } = useLocation();
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { data, isLoading } = useGetSamostoyatelnyeMarshrutyDetail(id || "");
-  const { mutateAsync } = useUpdateSamostoyatelnyeMarshruty();
+  const { data, isLoading } = useGetOrganizovannyeMarshrutyDetail(id || "");
+  const { mutateAsync } = useUpdateOrganizovannyeMarshruty();
 
   const pageType = state?.pageType;
 
@@ -39,7 +36,7 @@ export const SamostoyatelnyeMarshrutyEdit = () => {
 
   return (
     <Page type="edit">
-      <FormSamostoyatelnyeMarshruty onFinish={onFinish} initialValue={data} />
+      <FormOrganizovannyeMarshruty onFinish={onFinish} initialValue={data} />
     </Page>
   );
 };

@@ -1,7 +1,7 @@
-import { Button, notification, Table } from "antd";
+import { Button, Table } from "antd";
 import { useDeleteNewsArt, useGetNewsArt } from "../../../hooks/useNewsArt";
 import { TNewsArt } from "../../../api/newsArt";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DrawerAdd } from "./components/DrawerAdd";
 import { ModalView } from "./components/ModalView";
 import { DrawerEdit } from "./components/DrawerEdit";
@@ -9,21 +9,12 @@ import { ModalConfirmation } from "../../../components/ModalConfirmation";
 import { ButtonAction } from "../../../components/ButtonGroup";
 
 export const NovostiArt = () => {
-  const { isLoading, data, isError } = useGetNewsArt();
+  const { isLoading, data } = useGetNewsArt();
 
   const dataSource = data?.rows.map((item, index) => ({
     ...item,
     key: index + 1,
   }));
-
-  useEffect(() => {
-    if (isError) {
-      notification.error({
-        message: "Не удалось загрузить данные",
-        duration: 10,
-      });
-    }
-  }, [isError]);
 
   const { mutate: deleteNews } = useDeleteNewsArt();
 
@@ -130,7 +121,7 @@ export const NovostiArt = () => {
           dataSource={dataSource}
           columns={columns}
           loading={isLoading}
-        /* pagination={{ pageSize: 25 }} */
+          pagination={{ pageSize: 50 }}
         />
       </div>
       <DrawerAdd open={isOpenDrawer} onClose={onClose} />

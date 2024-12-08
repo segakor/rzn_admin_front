@@ -13,7 +13,16 @@ const GET_NEWS_ART = "GET_NEWS_ART";
 export const useGetNewsArt = () => {
   return useQuery({
     queryKey: [GET_NEWS_ART],
-    queryFn: () => getNewsArt(),
+    queryFn: async () => {
+      try {
+        return await getNewsArt();
+      } catch {
+        notification.error({
+          message: "Не удалось загрузить данные",
+          duration: 10,
+        });
+      }
+    },
   });
 };
 
@@ -36,9 +45,9 @@ export const useCreateNewsArt = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [GET_NEWS_ART] });
       notification.success({
-        message: 'Запись создана',
+        message: "Запись создана",
         duration: 5,
-        placement: 'bottom'
+        placement: "bottom",
       });
     },
     onError: (err: { data: { message: string } }) => {
@@ -58,9 +67,9 @@ export const useUpdateNewsArt = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [GET_NEWS_ART] });
       notification.success({
-        message: 'Запись обновлена',
+        message: "Запись обновлена",
         duration: 5,
-        placement: 'bottom'
+        placement: "bottom",
       });
     },
     onError: (err: { data: { message: string } }) => {

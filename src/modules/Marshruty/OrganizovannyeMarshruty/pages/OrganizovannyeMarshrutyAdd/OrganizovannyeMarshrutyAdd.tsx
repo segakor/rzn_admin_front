@@ -1,17 +1,17 @@
 import { useLocation, useNavigate } from "react-router";
-import { TCreateSamostoyatelnyeMarshruty } from "../../../../../api/samostoyatelnyeMarshruty";
-import { useCreateSamostoyatelnyeMarshruty } from "../../../../../hooks";
 import { FormProps } from "antd";
-import { FormSamostoyatelnyeMarshruty } from "../../form/FormSamostoyatelnyeMarshruty";
+import { FormOrganizovannyeMarshruty } from "../../form/FormOrganizovannyeMarshruty";
 import { Page } from "../../../../../components/Page";
+import { useCreateOrganizovannyeMarshruty } from "../../../../../hooks/useOrganizovannyeMarshruty";
+import { TCreateOrganizovannyeMarshruty } from "../../../../../api/organizovannyeMarshruty";
 
-type FieldType = TCreateSamostoyatelnyeMarshruty;
+type FieldType = TCreateOrganizovannyeMarshruty;
 
-export const SamostoyatelnyeMarshrutyAdd = () => {
+export const OrganizovannyeMarshrutyAdd = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const { mutateAsync } = useCreateSamostoyatelnyeMarshruty();
+  const { mutateAsync } = useCreateOrganizovannyeMarshruty();
 
   const pageType = state?.pageType;
 
@@ -30,7 +30,7 @@ export const SamostoyatelnyeMarshrutyAdd = () => {
 
   return (
     <Page type="add">
-      <FormSamostoyatelnyeMarshruty onFinish={onFinish} />
+      <FormOrganizovannyeMarshruty onFinish={onFinish} />
     </Page>
   );
 };

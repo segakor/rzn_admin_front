@@ -15,7 +15,16 @@ const GET_CHTO_POSMOTRET_DETAIL = "GET_CHTO_POSMOTRET_DETAIL";
 export const useGetChtoPosmotret = () => {
   return useQuery({
     queryKey: [GET_CHTO_POSMOTRET],
-    queryFn: () => getChtoPosmotret(),
+    queryFn: async () => {
+      try {
+        return await getChtoPosmotret();
+      } catch {
+        notification.error({
+          message: "Не удалось загрузить данные",
+          duration: 10,
+        });
+      }
+    },
     staleTime: 0,
     gcTime: 0,
   });

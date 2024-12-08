@@ -2,19 +2,23 @@ import { Table, Tag } from "antd";
 import { useState } from "react";
 import { ButtonAction } from "../../../../../components/ButtonGroup";
 import { useNavigate } from "react-router";
-import { useDeleteAnswer, useGetAnswer } from "../../../../../hooks";
-import { TAnswer } from "../../../../../api/answers";
 import { PageTable } from "../../../../../components/Page";
+import {
+  useDeleteOrganizovannyeMarshruty,
+  useGetOrganizovannyeMarshruty,
+} from "../../../../../hooks/useOrganizovannyeMarshruty";
+import { TOrganizovannyeMarshruty } from "../../../../../api/organizovannyeMarshruty";
 
-export const OtvetyNaVoprosy = () => {
-  const { isLoading, data } = useGetAnswer();
+export const OrganizovannyeMarshruty = () => {
+  const { isLoading, data } = useGetOrganizovannyeMarshruty();
 
   const dataSource = data?.rows.map((item, index) => ({
     ...item,
     key: index + 1,
   }));
 
-  const { mutate: deleteAnswer } = useDeleteAnswer();
+  const { mutate: deleteSamostoyatelnyeMarshruty } =
+    useDeleteOrganizovannyeMarshruty();
 
   const [modalConfirmData, setModalConfirmData] = useState({
     isOpen: false,
@@ -31,13 +35,13 @@ export const OtvetyNaVoprosy = () => {
   const navigate = useNavigate();
 
   const handleAdd = () => {
-    navigate("/main/ty-s-mestnym/otvety-na-voprosy/add", {
+    navigate("/main/marshruty/organizovannye-marshruty/add", {
       state: { pageType: "add" },
     });
   };
 
   const handleEdit = (id: number) => {
-    navigate(`/main/ty-s-mestnym/otvety-na-voprosy/edit/${id}`, {
+    navigate(`/main/marshruty/organizovannye-marshruty/edit/${id}`, {
       state: { pageType: "edit" },
     });
   };
@@ -49,19 +53,24 @@ export const OtvetyNaVoprosy = () => {
       width: "5%",
     },
     {
-      title: "Вопрос",
+      title: "Заголовок",
       dataIndex: "title",
     },
     {
-      title: "Категория",
-      dataIndex: "category",
-      render: (category: string) => {
-        return <Tag>{category}</Tag>;
+      title: "Даты",
+      render: (row: TOrganizovannyeMarshruty) => {
+        return (
+          <div className="max-w-80">
+            {row.dates.map((value, index) => (
+              <Tag key={index}>{value}</Tag>
+            ))}
+          </div>
+        );
       },
     },
     {
       title: "Действие",
-      render: (row: TAnswer) => {
+      render: (row: TOrganizovannyeMarshruty) => {
         return (
           <ButtonAction
             onDelete={() => onOpenModalConfirm(row.id)}
@@ -75,11 +84,13 @@ export const OtvetyNaVoprosy = () => {
 
   return (
     <PageTable
-      title={"Ответы на вопросы"}
+      title={"Организованные маршруты"}
       handleAdd={handleAdd}
       isOpenModalConfirmation={modalConfirmData.isOpen}
       onCloseModalConfirmation={onCloseModalConfirm}
-      onConfirmModalConfirm={() => deleteAnswer(modalConfirmData.deletedId)}
+      onConfirmModalConfirm={() =>
+        deleteSamostoyatelnyeMarshruty(modalConfirmData.deletedId)
+      }
     >
       <Table
         dataSource={dataSource}

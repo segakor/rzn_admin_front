@@ -14,7 +14,13 @@ export const MarshrutyRoutes = () => {
       import("./SamostoyatelnyeMarshruty/pages/SamostoyatelnyeMarshrutyEdit")
   );
   const OrganizovannyeMarshruty = lazy(
-    () => import("./OrganizovannyeMarshruty")
+    () => import("./OrganizovannyeMarshruty/pages/OrganizovannyeMarshruty")
+  );
+  const OrganizovannyeMarshrutyAdd = lazy(
+    () => import("./OrganizovannyeMarshruty/pages/OrganizovannyeMarshrutyAdd")
+  );
+  const OrganizovannyeMarshrutyEdit = lazy(
+    () => import("./OrganizovannyeMarshruty/pages/OrganizovannyeMarshrutyEdit")
   );
 
   return (
@@ -33,7 +39,7 @@ export const MarshrutyRoutes = () => {
             path="organizovannye-marshruty/add"
             element={
               <Suspense fallback={<Spin />}>
-                <div>organizovannye-marshruty/add</div>
+                <OrganizovannyeMarshrutyAdd />
               </Suspense>
             }
           />
@@ -41,7 +47,7 @@ export const MarshrutyRoutes = () => {
             path="organizovannye-marshruty/edit/:id"
             element={
               <Suspense fallback={<Spin />}>
-                <div>organizovannye-marshruty/edit</div>
+                <OrganizovannyeMarshrutyEdit />
               </Suspense>
             }
           />
