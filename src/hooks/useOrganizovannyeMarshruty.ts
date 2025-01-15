@@ -10,13 +10,13 @@ import {
   updateOrganizovannyeMarshruty,
 } from "../api/organizovannyeMarshruty";
 
-const GET_SAMOSTOYATELNYE_MARSHRUTY = "GET_SAMOSTOYATELNYE_MARSHRUTY";
-const GET_SAMOSTOYATELNYE_MARSHRUTY_DETAIL =
-  "GET_SAMOSTOYATELNYE_MARSHRUTY_DETAIL";
+const GET_ORGANIZOVANNYE_MARSHRUTY = "GET_ORGANIZOVANNYE_MARSHRUTY";
+const GET_ORGANIZOVANNYE_MARSHRUTY_DETAIL =
+  "GET_ORGANIZOVANNYE_MARSHRUTY_DETAIL";
 
 export const useGetOrganizovannyeMarshruty = () => {
   return useQuery({
-    queryKey: [GET_SAMOSTOYATELNYE_MARSHRUTY],
+    queryKey: [GET_ORGANIZOVANNYE_MARSHRUTY],
     queryFn: async () => {
       try {
         return await getOrganizovannyeMarshruty();
@@ -34,7 +34,7 @@ export const useGetOrganizovannyeMarshruty = () => {
 
 export const useGetOrganizovannyeMarshrutyDetail = (id: string) => {
   return useQuery({
-    queryKey: [GET_SAMOSTOYATELNYE_MARSHRUTY_DETAIL, id],
+    queryKey: [GET_ORGANIZOVANNYE_MARSHRUTY_DETAIL, id],
     queryFn: () => getOrganizovannyeMarshrutyDetail(id),
   });
 };
@@ -46,7 +46,7 @@ export const useDeleteOrganizovannyeMarshruty = () => {
     mutationFn: (id: number) => deleteOrganizovannyeMarshruty(id),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [GET_SAMOSTOYATELNYE_MARSHRUTY],
+        queryKey: [GET_ORGANIZOVANNYE_MARSHRUTY],
       });
     },
   });
@@ -63,7 +63,7 @@ export const useCreateOrganizovannyeMarshruty = () => {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [GET_SAMOSTOYATELNYE_MARSHRUTY],
+        queryKey: [GET_ORGANIZOVANNYE_MARSHRUTY],
       });
       notification.success({
         message: "Запись создана",
@@ -91,7 +91,7 @@ export const useUpdateOrganizovannyeMarshruty = () => {
       }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: [GET_SAMOSTOYATELNYE_MARSHRUTY_DETAIL],
+        queryKey: [GET_ORGANIZOVANNYE_MARSHRUTY_DETAIL],
       });
       notification.success({
         message: "Запись обновлена",
