@@ -22,6 +22,15 @@ export const MarshrutyRoutes = () => {
   const OrganizovannyeMarshrutyEdit = lazy(
     () => import("./OrganizovannyeMarshruty/pages/OrganizovannyeMarshrutyEdit")
   );
+  const Gid = lazy(
+    () => import("./Gid/pages/Gid")
+  );
+  const GidAdd = lazy(
+    () => import("./Gid/pages/GidAdd")
+  );
+  const GidEdit = lazy(
+    () => import("./Gid/pages/GidEdit")
+  );
 
   return (
     <Suspense fallback={<Spin />}>
@@ -72,6 +81,30 @@ export const MarshrutyRoutes = () => {
             element={
               <Suspense fallback={<Spin />}>
                 <SamostoyatelnyeMarshrutyEdit />
+              </Suspense>
+            }
+          />
+          <Route
+            path="gid"
+            element={
+              <Suspense fallback={<Spin />}>
+                <Gid />
+              </Suspense>
+            }
+          />
+          <Route
+            path="gid/add"
+            element={
+              <Suspense fallback={<Spin />}>
+                <GidAdd />
+              </Suspense>
+            }
+          />
+          <Route
+            path="gid/edit/:id"
+            element={
+              <Suspense fallback={<Spin />}>
+                <GidEdit />
               </Suspense>
             }
           />

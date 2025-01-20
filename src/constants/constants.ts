@@ -11,6 +11,7 @@ export const fileDestination = {
   CHTO_POSMOTRET: "chto-posmotret",
   SAMOSTOYATELNYE_MARSHRUTY: "samostoyatelnye_marshruty",
   ORGANIZOVANNYE_MARSHRUTY: "organizovannye_marshruty",
+  GID: "gid",
 };
 
 export const longredIitle = {
@@ -43,8 +44,7 @@ export const tabsOtvetyNaVoprosy = [
   { label: "Частные вопросы", value: "Частные вопросы" },
   { label: "Сувениры", value: "Сувениры" },
   { label: "Вечер в городе", value: "Вечер в городе" },
-
-]
+];
 
 export const tags = [
   { label: "vegan", value: 1 },

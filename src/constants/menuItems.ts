@@ -50,6 +50,10 @@ export const menuItems = [
         key: "/marshruty/organizovannye-marshruty",
       },
       {
+        label: "Гиды",
+        key: "/marshruty/gid",
+      },
+      {
         label: "Самостоятельные машруты",
         key: "/marshruty/samostoyatelnye-marshruty",
       },
