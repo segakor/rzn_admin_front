@@ -4,6 +4,7 @@ import {
 } from "../../../../constants/constants";
 import { ImageUploader } from "../../../../components/ImageUploader";
 import { TCreateGid, TGid } from "../../../../api/gid";
+import Editor from "../../../../components/Editor";
 
 type FieldType = TCreateGid & {
   id: string;
@@ -20,6 +21,10 @@ export const FormGid = ({ onFinish, initialValue }: Props) => {
 
   const onChangeImageUploader = (e: number) => {
     form.setFieldValue("imageId", e);
+  };
+
+  const onChangeEditor = (e: string) => {
+    form.setFieldValue("bodyText", e);
   };
 
   return (
@@ -61,7 +66,7 @@ export const FormGid = ({ onFinish, initialValue }: Props) => {
         name="bodyText"
         rules={[{ required: true, message: "Заполните обязательное поле" }]}
       >
-        <Input placeholder="Введите описание" size="large" />
+        <Editor initData={initialValue?.bodyText || ''} onChange={onChangeEditor} />
       </Form.Item>
       <Form.Item<FieldType>
         label={
