@@ -26,6 +26,7 @@ export const Editor = ({
 
   return (
     <div className="editor">
+      <div className="italic"><b>Рекомендация: </b>перенос строк делать через Shift + Enter</div>
       <CKEditor
         config={{
           versionCheck: false,

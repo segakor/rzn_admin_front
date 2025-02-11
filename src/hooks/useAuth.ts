@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { tokenService } from "../service/tokenService";
 import { notification } from "antd";
 
-const GET_CHECK_AUTH = 'GET_CHECK_AUTH'
+const GET_CHECK_AUTH = "GET_CHECK_AUTH";
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -18,9 +18,8 @@ export const useLogin = () => {
       navigate("/main");
     },
     onError: (err: any) => {
-      console.log(err)
       notification.error({
-        message: err?.data?.message || err.statusText || 'Error',
+        message: err?.data?.message || err.statusText || JSON.stringify(err),
         duration: 10,
       });
     },
@@ -40,10 +39,9 @@ export const useLogout = () => {
   };
 };
 
-
 export const useCheckAuth = (location: string) => {
   return useQuery({
     queryKey: [GET_CHECK_AUTH, location],
     queryFn: () => checkAuth(),
   });
-}
+};

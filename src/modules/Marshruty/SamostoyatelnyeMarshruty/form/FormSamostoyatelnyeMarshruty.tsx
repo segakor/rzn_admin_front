@@ -6,7 +6,10 @@ import {
 } from "../../../../constants/constants";
 import Editor from "../../../../components/Editor";
 import { ImageUploader } from "../../../../components/ImageUploader";
-import { TCreateSamostoyatelnyeMarshruty, TSamostoyatelnyeMarshruty } from "../../../../api/samostoyatelnyeMarshruty";
+import {
+  TCreateSamostoyatelnyeMarshruty,
+  TSamostoyatelnyeMarshruty,
+} from "../../../../api/samostoyatelnyeMarshruty";
 
 type FieldType = TCreateSamostoyatelnyeMarshruty & {
   id: string;
@@ -18,12 +21,20 @@ type Props = {
   initialValue?: TSamostoyatelnyeMarshruty;
 };
 
-export const FormSamostoyatelnyeMarshruty = ({ onFinish, initialValue }: Props) => {
+export const FormSamostoyatelnyeMarshruty = ({
+  onFinish,
+  initialValue,
+}: Props) => {
   const [form] = Form.useForm();
 
   const onChangeEditor = (e: string) => {
     form.setFieldValue("bodyText", e);
   };
+
+  const onChangeEditorSubtitle = (e: string) => {
+    form.setFieldValue("subTitle", e);
+
+  }
 
   const onChangeImageUploader = (e: number) => {
     form.setFieldValue("imageId", e);
@@ -58,7 +69,10 @@ export const FormSamostoyatelnyeMarshruty = ({ onFinish, initialValue }: Props) 
         name="subTitle"
         rules={[{ required: true, message: "Заполните обязательное поле" }]}
       >
-        <Input placeholder="Введите описание" size="large" />
+        <Editor
+          initData={initialValue?.subTitle || ""}
+          onChange={onChangeEditorSubtitle}
+        />
       </Form.Item>
       <Form.Item<FieldType>
         label={
@@ -84,7 +98,7 @@ export const FormSamostoyatelnyeMarshruty = ({ onFinish, initialValue }: Props) 
           </Typography.Title>
         }
         name="tags"
-        rules={[{ required: true, message: "Заполните обязательное поле" }]}
+      /* rules={[{ required: true, message: "Заполните обязательное поле" }]} */
       >
         <Select
           mode="multiple"
@@ -112,7 +126,12 @@ export const FormSamostoyatelnyeMarshruty = ({ onFinish, initialValue }: Props) 
           </Typography.Title>
         }
         name="template"
-        rules={[{ required: !linkPath ? true : false, message: "Заполните обязательное поле" }]}
+        rules={[
+          {
+            required: !linkPath ? true : false,
+            message: "Заполните обязательное поле",
+          },
+        ]}
       >
         <Editor
           initData={initialValue?.template || ""}

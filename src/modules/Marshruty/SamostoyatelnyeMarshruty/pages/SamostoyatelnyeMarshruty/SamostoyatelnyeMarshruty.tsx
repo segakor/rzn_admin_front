@@ -60,6 +60,9 @@ export const SamostoyatelnyeMarshruty = () => {
     {
       title: "Описание",
       dataIndex: "subTitle",
+      render: (subTitle: string) => {
+        return <div dangerouslySetInnerHTML={{ __html: subTitle }} />
+      },
     },
     {
       title: "Категория",
@@ -73,7 +76,7 @@ export const SamostoyatelnyeMarshruty = () => {
       render: (row: TSamostoyatelnyeMarshruty) => {
         return (
           <div className="max-w-80">
-            {row.tags.map((value, index) => (
+            {row.tags?.map((value, index) => (
               <Tag key={index}>
                 {tags.find((item) => item.value === value)?.label}
               </Tag>

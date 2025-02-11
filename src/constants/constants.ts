@@ -63,4 +63,5 @@ export const tagsSamostoyatelnyeMarshruty = [
   { label: "peshkom", value: 11 },
   { label: "avto", value: 12 },
   { label: "colab", value: 13 },
+  { label: "pobeda", value: 13 },
 ];
