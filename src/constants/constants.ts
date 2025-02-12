@@ -12,6 +12,7 @@ export const fileDestination = {
   SAMOSTOYATELNYE_MARSHRUTY: "samostoyatelnye_marshruty",
   ORGANIZOVANNYE_MARSHRUTY: "organizovannye_marshruty",
   GID: "gid",
+  PROMTURIZM: "promturizm",
 };
 
 export const longredIitle = {
@@ -63,5 +64,12 @@ export const tagsSamostoyatelnyeMarshruty = [
   { label: "peshkom", value: 11 },
   { label: "avto", value: 12 },
   { label: "colab", value: 13 },
-  { label: "pobeda", value: 13 },
+  { label: "pobeda", value: 14 },
+];
+
+export const tagsPromturizm = [
+  { label: "Туристическим группам", value: "group" },
+  { label: "Школьникам", value: "school" },
+  { label: "Студентам", value: "individual" },
+  { label: "Индивидуальным туристам", value: "student" },
 ];

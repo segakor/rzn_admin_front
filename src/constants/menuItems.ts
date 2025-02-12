@@ -93,8 +93,8 @@ export const menuItems = [
     key: "Проекты",
     label: "Проекты",
     children: [
-      { label: "Библиотека", key: "/biblioteka" },
-      { label: "Промтуризм", key: "/promturizm" },
+      { label: "Библиотека", key: "/projects/biblioteka" },
+      { label: "Промтуризм", key: "/projects/promturizm" },
     ],
   },
   {

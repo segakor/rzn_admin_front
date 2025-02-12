@@ -1,48 +1,42 @@
-import { Button, Divider, Form, Input, InputNumber, Select, Typography } from "antd";
+import { Button, Divider, Form, Input, Select, Typography, InputNumber } from "antd";
 import {
   fileDestination,
-  tabsSamostoyatelnyeMarshruty,
-  tagsSamostoyatelnyeMarshruty,
+  tagsPromturizm,
 } from "../../../../constants/constants";
 import Editor from "../../../../components/Editor";
 import { ImageUploader } from "../../../../components/ImageUploader";
-import {
-  TCreateSamostoyatelnyeMarshruty,
-  TSamostoyatelnyeMarshruty,
-} from "../../../../api/samostoyatelnyeMarshruty";
+import { TPromturizm } from "../../../../api/promturizm";
 
-type FieldType = TCreateSamostoyatelnyeMarshruty & {
-  id: string;
-};
+type FieldType = TPromturizm
 
 type Props = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onFinish: (values: any) => void;
-  initialValue?: TSamostoyatelnyeMarshruty;
+  initialValue?: TPromturizm;
 };
 
-export const FormSamostoyatelnyeMarshruty = ({
+export const FormPromturizm = ({
   onFinish,
   initialValue,
 }: Props) => {
   const [form] = Form.useForm();
 
   const onChangeEditor = (e: string) => {
-    form.setFieldValue("template", e);
+    form.setFieldValue("bodyText", e);
   };
 
   const onChangeEditorSubtitle = (e: string) => {
     form.setFieldValue("subTitle", e);
-  };
+
+  }
 
   const onChangeImageUploader = (e: number) => {
     form.setFieldValue("imageId", e);
   };
 
-  const linkPath = Form.useWatch("linkPath", form);
   return (
     <Form
-      name="samostoyatelnyeMarshruty"
+      name="promturizm"
       onFinish={onFinish}
       layout="vertical"
       form={form}
@@ -76,29 +70,24 @@ export const FormSamostoyatelnyeMarshruty = ({
       <Form.Item<FieldType>
         label={
           <Typography.Title className="!m-0" level={5}>
-            Порядковый номер
+            Адрес
           </Typography.Title>
         }
-        name="sequence"
+        name="address"
+        rules={[{ required: true, message: "Заполните обязательное поле" }]}
       >
-        <InputNumber placeholder="Введите порядковый номер" min={0} style={{ width: '100%' }} />
+        <Input placeholder="Введите адрес" size="large" />
       </Form.Item>
       <Form.Item<FieldType>
         label={
           <Typography.Title className="!m-0" level={5}>
-            Категории
+            Возраст
           </Typography.Title>
         }
-        name="category"
+        name="ageLimit"
         rules={[{ required: true, message: "Заполните обязательное поле" }]}
       >
-        <Select
-          allowClear
-          style={{ width: "100%" }}
-          placeholder="Выбирете категорию"
-          options={tabsSamostoyatelnyeMarshruty}
-          size="large"
-        />
+        <InputNumber min={0} placeholder="Введите возраст" size="large" style={{ width: '100%' }} />
       </Form.Item>
       <Form.Item<FieldType>
         label={
@@ -107,37 +96,27 @@ export const FormSamostoyatelnyeMarshruty = ({
           </Typography.Title>
         }
         name="tags"
-      /* rules={[{ required: true, message: "Заполните обязательное поле" }]} */
+        rules={[{ required: true, message: "Заполните обязательное поле" }]}
       >
         <Select
           mode="multiple"
           allowClear
           style={{ width: "100%" }}
           placeholder="Выбирете тэги"
-          options={tagsSamostoyatelnyeMarshruty}
+          options={tagsPromturizm}
           size="large"
         />
       </Form.Item>
       <Form.Item<FieldType>
         label={
           <Typography.Title className="!m-0" level={5}>
-            Ссылка на партнерский маршрут
-          </Typography.Title>
-        }
-        name="linkPath"
-      >
-        <Input placeholder="Введите ссылку" size="large" />
-      </Form.Item>
-      <Form.Item<FieldType>
-        label={
-          <Typography.Title className="!m-0" level={5}>
-            Лонгрид
+            Лонгрид в popup
           </Typography.Title>
         }
         name="template"
         rules={[
           {
-            required: !linkPath ? true : false,
+            required: true,
             message: "Заполните обязательное поле",
           },
         ]}
@@ -146,7 +125,7 @@ export const FormSamostoyatelnyeMarshruty = ({
           initData={initialValue?.template || ""}
           onChange={onChangeEditor}
           isLongRead
-          destination={fileDestination.SAMOSTOYATELNYE_MARSHRUTY}
+          destination={fileDestination.PROMTURIZM}
         />
       </Form.Item>
       <Form.Item<FieldType>

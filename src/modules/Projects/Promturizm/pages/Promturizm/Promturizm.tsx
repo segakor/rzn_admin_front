@@ -1,17 +1,14 @@
 import { Table, Tag } from "antd";
 import { useState } from "react";
-import {
-  useDeleteSamostoyatelnyeMarshruty,
-  useGetSamostoyatelnyeMarshruty,
-} from "../../../../../hooks";
 import { ButtonAction } from "../../../../../components/ButtonGroup";
 import { useNavigate } from "react-router";
-import { tagsSamostoyatelnyeMarshruty } from "../../../../../constants/constants";
-import { TSamostoyatelnyeMarshruty } from "../../../../../api/samostoyatelnyeMarshruty";
 import { PageTable } from "../../../../../components/Page";
+import { useDeletePromturizm, useGetPromturizm } from "../../../../../hooks/usePromturizm";
+import { TPromturizm } from "../../../../../api/promturizm";
+import { tagsPromturizm } from "../../../../../constants/constants";
 
-export const SamostoyatelnyeMarshruty = () => {
-  const { isLoading, data } = useGetSamostoyatelnyeMarshruty();
+export const Promturizm = () => {
+  const { isLoading, data } = useGetPromturizm();
 
   const dataSource = data?.rows.map((item, index) => ({
     ...item,
@@ -19,7 +16,7 @@ export const SamostoyatelnyeMarshruty = () => {
   }));
 
   const { mutate: deleteSamostoyatelnyeMarshruty } =
-    useDeleteSamostoyatelnyeMarshruty();
+    useDeletePromturizm();
 
   const [modalConfirmData, setModalConfirmData] = useState({
     isOpen: false,
@@ -36,21 +33,21 @@ export const SamostoyatelnyeMarshruty = () => {
   const navigate = useNavigate();
 
   const handleAdd = () => {
-    navigate("/main/marshruty/samostoyatelnye-marshruty/add", {
+    navigate("/main/projects/promturizm/add", {
       state: { pageType: "add" },
     });
   };
 
   const handleEdit = (id: number) => {
-    navigate(`/main/marshruty/samostoyatelnye-marshruty/edit/${id}`, {
+    navigate(`/main/projects/promturizm/edit/${id}`, {
       state: { pageType: "edit" },
     });
   };
 
   const columns = [
     {
-      title: "sequence",
-      dataIndex: "sequence",
+      title: "#",
+      dataIndex: "key",
       width: "5%",
     },
     {
@@ -58,27 +55,13 @@ export const SamostoyatelnyeMarshruty = () => {
       dataIndex: "title",
     },
     {
-      title: "Описание",
-      dataIndex: "subTitle",
-      render: (subTitle: string) => {
-        return <div dangerouslySetInnerHTML={{ __html: subTitle }} />
-      },
-    },
-    {
-      title: "Категория",
-      dataIndex: "category",
-      render: (category: string) => {
-        return <Tag>{category}</Tag>;
-      },
-    },
-    {
       title: "Тэги",
-      render: (row: TSamostoyatelnyeMarshruty) => {
+      render: (row: TPromturizm) => {
         return (
           <div className="max-w-80">
             {row.tags?.map((value, index) => (
               <Tag key={index}>
-                {tagsSamostoyatelnyeMarshruty.find((item) => item.value === value)?.label}
+                {tagsPromturizm.find((item) => item.value === value)?.label}
               </Tag>
             ))}
           </div>
@@ -87,7 +70,7 @@ export const SamostoyatelnyeMarshruty = () => {
     },
     {
       title: "Действие",
-      render: (row: TSamostoyatelnyeMarshruty) => {
+      render: (row: TPromturizm) => {
         return (
           <ButtonAction
             onDelete={() => onOpenModalConfirm(row.id)}
@@ -101,7 +84,7 @@ export const SamostoyatelnyeMarshruty = () => {
 
   return (
     <PageTable
-      title={"Самостоятельные маршруты"}
+      title={"Промтуризм"}
       handleAdd={handleAdd}
       isOpenModalConfirmation={modalConfirmData.isOpen}
       onCloseModalConfirmation={onCloseModalConfirm}

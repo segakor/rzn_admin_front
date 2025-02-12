@@ -8,6 +8,7 @@ import { TySMestnymRoutes } from "../TySMestnym/TySMestnymRoutes";
 import { MainRoutes } from "./MainRoutes";
 import { useLocation } from "react-router";
 import { useCheckAuth } from "../../hooks";
+import { ProjectRoutes } from "../Projects/ProjectsRoutes";
 
 export const Main = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ export const Main = () => {
       <MarshrutyRoutes />
       <ProfessionalamRoutes />
       <KontaktyRoutes />
+      <ProjectRoutes />
     </LayoutComponent>
   );
 };
