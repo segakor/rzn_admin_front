@@ -139,7 +139,7 @@ export const FormPromturizm = ({
       >
         <ImageUploader
           onChange={onChangeImageUploader}
-          destination={fileDestination.SAMOSTOYATELNYE_MARSHRUTY}
+          destination={fileDestination.PROMTURIZM}
           initialPath={initialValue?.storage_image?.imagePath}
         />
       </Form.Item>
