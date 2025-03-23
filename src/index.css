@@ -20,3 +20,74 @@ a {
 #cke_1_contents {
   min-height: 600px !important;
 } */
+
+.styled_link a {
+  transition: all ease 0.4s;
+  text-decoration: underline;
+  color: var(--color-blue);
+}
+.styled_link a:hover {
+  transition: all ease 0.4s;
+  color: var(--color-green);
+}
+
+.styled_list li {
+  position: relative;
+}
+
+.styled_list li:before {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  content: "";
+  background-image: url("/listBlock/list.svg");
+  background-size: cover;
+  height: 0.875rem;
+  width: 0.875rem;
+}
+
+.styled_list ul > li {
+  margin-bottom: 1.25rem;
+  padding-left: 1.875rem;
+}
+
+:root {
+  --color-black: rgba(0, 0, 0, 1);
+  --color-white: rgba(255, 255, 255, 1);
+  --color-green: rgba(185, 250, 79, 1);
+  --color-grey: rgba(137, 137, 137, 1);
+  --color-semi-black: rgba(20, 20, 20, 0.5);
+  --color-light-grey: rgba(201, 201, 201, 1);
+  --color-semi-light-gray: rgba(0, 0, 0, 0.1);
+  --color-very-light-gray: rgba(242, 242, 242, 1);
+  --color-graphite: rgba(37, 37, 37, 1);
+  --color-semi-white: rgba(255, 255, 255, 0.5);
+  --color-longread-grey: rgba(245, 245, 245, 1);
+  --color-purple: rgba(127, 108, 250, 1);
+  --color-blue: rgba(83, 99, 247, 1);
+  --color-partner-card-grey: rgba(247, 247, 247, 1);
+}
+
+.grid_layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  gap: 80px;
+  padding: 0 10px;
+  @media (max-width: 768px) {
+    gap: 40px;
+  }
+}
+.logread_wrapper {
+  display: flex;
+  gap: 28px;
+}
+.longread_body {
+  display: grid;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}

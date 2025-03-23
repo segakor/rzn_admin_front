@@ -1,10 +1,12 @@
-import { Button, Form, FormProps } from "antd";
+import { Button, Form, FormProps, Spin } from "antd";
 import {
   useCreateLongRead,
   useGetLongRead,
   useUpdateLongRead,
 } from "../../hooks/useLongRead";
 import Editor from "../Editor";
+import { useState } from "react";
+import { ModalPreview } from "../ModalPreview";
 
 type FieldType = {
   title: string;
@@ -15,6 +17,7 @@ type Props = {
   longreadTitle: string;
 };
 export const LongreadEditor = ({ longreadTitle }: Props) => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const { data, isLoading } = useGetLongRead(longreadTitle);
 
   const { mutate } = useUpdateLongRead();
@@ -23,25 +26,30 @@ export const LongreadEditor = ({ longreadTitle }: Props) => {
 
   const [form] = Form.useForm();
 
+  const bodyTextWatched = Form.useWatch("bodyText", form);
+
   const onChangeEditor = (e: string) => {
     form.setFieldValue("bodyText", e);
   };
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
-    console.log(values);
     mutate({ ...values, title: longreadTitle });
   };
 
+  if (isLoading) {
+    return <Spin />
+  }
+
   return (
     <div>
-      {!data?.bodyText && !isLoading && (
+      {!data?.bodyText && (
         <div>
           <Button
             onClick={() =>
               mutateCreate({ bodyText: "init", title: longreadTitle })
             }
           >
-            Create
+            Добавить
           </Button>
         </div>
       )}
@@ -60,16 +68,20 @@ export const LongreadEditor = ({ longreadTitle }: Props) => {
               initData={data?.bodyText}
               onChange={onChangeEditor}
               isLongRead
-              destination={longreadTitle}
+              destination={`lognread_${longreadTitle}`}
             />
           )}
         </Form.Item>
-        <Form.Item>
+        <Form.Item >
           <Button type="primary" htmlType="submit" size="large">
             Сохранить
           </Button>
+          <Button type='dashed' onClick={() => setIsOpenModal(true)} size="large" className='ml-2'>
+            Предпросмотр
+          </Button>
         </Form.Item>
       </Form>
-    </div>
+      <ModalPreview onClose={() => setIsOpenModal(false)} isOpen={isOpenModal} bodyText={bodyTextWatched} />
+    </div >
   );
 };

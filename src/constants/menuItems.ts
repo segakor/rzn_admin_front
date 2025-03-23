@@ -1,5 +1,9 @@
 export const menuItems = [
   {
+    key: "/banner/all",
+    label: "Банеры",
+  },
+  {
     key: "Регион",
     label: "Регион",
     children: [

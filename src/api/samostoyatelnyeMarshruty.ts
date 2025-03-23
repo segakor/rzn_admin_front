@@ -5,7 +5,6 @@ export type TSamostoyatelnyeMarshruty = {
   id: number;
   title: string;
   subTitle: string;
-  address: string;
   storage_image: {
     imagePath: string;
   };

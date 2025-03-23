@@ -13,6 +13,7 @@ export const fileDestination = {
   ORGANIZOVANNYE_MARSHRUTY: "organizovannye_marshruty",
   GID: "gid",
   PROMTURIZM: "promturizm",
+  BANNER: "banner",
 };
 
 export const longredIitle = {
@@ -22,6 +23,11 @@ export const longredIitle = {
   KULTURA: "kultura",
   SOBYTIYA: "sobytiya",
   PRIRODA: "priroda",
+  CIT: "cit",
+  OBRATNAYA_ZVYAZ: "obratnaya-svyaz",
+  MOBILNOE_PRILOZHENIE: "mobilnoe-prilozhenie",
+  REESTR_TUROPERATOROV: "reestr-turoperatorov",
+  KONTAKTY: "kontakty",
 };
 
 export const dateFormat = "DD-MM-YYYY";
