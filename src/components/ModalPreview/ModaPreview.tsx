@@ -27,7 +27,7 @@ export const ModalPreview = ({ isOpen, onClose, bodyText }: Props) => {
 
   return (
     <Modal
-      title="Удаление записи"
+      title="Предпросмотр"
       open={isOpen}
       onCancel={onClose}
       width={'100%'}

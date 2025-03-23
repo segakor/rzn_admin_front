@@ -10,13 +10,14 @@ export const RegionRoutes = () => {
   const KuhnyaRyazanskogoKray = lazy(() => import("./KuhnyaRyazanskogoKray"));
   const Arhitektura = lazy(() => import("./Arhitektura"));
   const Sobytiya = lazy(() => import("./Sobytiya"));
-  const NasledieRyazan = lazy(() => import("./NasledieRyazan"));
-  const NasledieKasimova = lazy(() => import("./NasledieKasimova"));
+  const Nasledie = lazy(() => import("./Nasledie/pages/Nasledie"));
+  const NasledieAdd = lazy(() => import("./Nasledie/pages/NasledieAdd"));
+  const NasledieEdit = lazy(() => import("./Nasledie/pages/NasledieEdit"));
 
   return (
     <Suspense fallback={<Spin />}>
       <Routes>
-        <Route path="region" element={<PrivateRoute/>}>
+        <Route path="region" element={<PrivateRoute />}>
           <Route
             path="istoriya"
             element={
@@ -66,18 +67,26 @@ export const RegionRoutes = () => {
             }
           />
           <Route
-            path="nasledie-ryazani"
+            path="nasledie"
             element={
               <Suspense fallback={<Spin />}>
-                <NasledieRyazan />
+                <Nasledie />
               </Suspense>
             }
           />
           <Route
-            path="nasledie-kasimova"
+            path="nasledie/add"
             element={
               <Suspense fallback={<Spin />}>
-                <NasledieKasimova />
+                <NasledieAdd />
+              </Suspense>
+            }
+          />
+          <Route
+            path="nasledie/edit/:id"
+            element={
+              <Suspense fallback={<Spin />}>
+                <NasledieEdit />
               </Suspense>
             }
           />

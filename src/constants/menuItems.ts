@@ -16,8 +16,7 @@ export const menuItems = [
       },
       { label: "Архитектура", key: "/region/arhitektura" },
       { label: "События", key: "/region/sobytiya" },
-      { label: "Наследие Рязани", key: "/region/nasledie-ryazani" },
-      { label: "Наследие Касимова", key: "/region/nasledie-kasimova" },
+      { label: "Наследие (общee)", key: "/region/nasledie" },
     ],
   },
   {

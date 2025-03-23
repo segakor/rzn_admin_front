@@ -3,20 +3,20 @@ import { useState } from "react";
 import { ButtonAction } from "../../../../../components/ButtonGroup";
 import { useNavigate } from "react-router";
 import { PageTable } from "../../../../../components/Page";
-import { useDeletePromturizm, useGetPromturizm } from "../../../../../hooks/usePromturizm";
-import { TPromturizm } from "../../../../../api/promturizm";
-import { tagsPromturizm } from "../../../../../constants/constants";
+import { useDeleteNasledie, useGetNasledie } from "../../../../../hooks/useNasledie";
+import { categoryNasledie } from "../../../../../constants/constants";
+import { TNasledie } from "../../../../../api/nasledie";
 
-export const Promturizm = () => {
-  const { isLoading, data } = useGetPromturizm();
+export const Nasledie = () => {
+  const { isLoading, data } = useGetNasledie();
 
   const dataSource = data?.rows.map((item, index) => ({
     ...item,
     key: index + 1,
   }));
 
-  const { mutate: deletePromturizm } =
-    useDeletePromturizm();
+  const { mutate: deleteNasledie } =
+    useDeleteNasledie();
 
   const [modalConfirmData, setModalConfirmData] = useState({
     isOpen: false,
@@ -33,13 +33,13 @@ export const Promturizm = () => {
   const navigate = useNavigate();
 
   const handleAdd = () => {
-    navigate("/main/projects/promturizm/add", {
+    navigate("/main/region/nasledie/add", {
       state: { pageType: "add" },
     });
   };
 
   const handleEdit = (id: number) => {
-    navigate(`/main/projects/promturizm/edit/${id}`, {
+    navigate(`/main/region/nasledie/edit/${id}`, {
       state: { pageType: "edit" },
     });
   };
@@ -51,26 +51,29 @@ export const Promturizm = () => {
       width: "5%",
     },
     {
-      title: "Заголовок",
-      dataIndex: "title",
-    },
-    {
-      title: "Тэги",
-      render: (row: TPromturizm) => {
+      title: "Категория",
+      dataIndex: "category",
+      render: (category: string) => {
         return (
           <div className="max-w-80">
-            {row.tags?.map((value, index) => (
-              <Tag key={index}>
-                {tagsPromturizm.find((item) => item.value === value)?.label}
-              </Tag>
-            ))}
+            <Tag>
+              {categoryNasledie.find((item => item.value === category))?.label}
+            </Tag>
           </div>
         );
       },
     },
     {
+      title: "Заголовок",
+      dataIndex: "title",
+    },
+    {
+      title: "Описание",
+      dataIndex: "subTitle",
+    },
+    {
       title: "Действие",
-      render: (row: TPromturizm) => {
+      render: (row: TNasledie) => {
         return (
           <ButtonAction
             onDelete={() => onOpenModalConfirm(row.id)}
@@ -84,12 +87,12 @@ export const Promturizm = () => {
 
   return (
     <PageTable
-      title={"Промтуризм"}
+      title={"Наследие"}
       handleAdd={handleAdd}
       isOpenModalConfirmation={modalConfirmData.isOpen}
       onCloseModalConfirmation={onCloseModalConfirm}
       onConfirmModalConfirm={() =>
-        deletePromturizm(modalConfirmData.deletedId)
+        deleteNasledie(modalConfirmData.deletedId)
       }
     >
       <Table

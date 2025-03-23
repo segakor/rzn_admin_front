@@ -1,10 +1,3 @@
-export const dictElment = {
-  LEAD_BLOCK: "Лид",
-  LONG_READ_BLOCK: "Раздел",
-  LONG_READ_ITEM_BLOCK: "Подраздел",
-  TEXT_BLOCK: "Текстовый блок",
-};
-
 export const fileDestination = {
   NOVOSTI_ART: "novosti-art",
   NOVOSTI_REGION: "novosti-region",
@@ -14,6 +7,7 @@ export const fileDestination = {
   GID: "gid",
   PROMTURIZM: "promturizm",
   BANNER: "banner",
+  NASLEDIE: "nasledie",
 };
 
 export const longredIitle = {
@@ -78,4 +72,9 @@ export const tagsPromturizm = [
   { label: "Школьникам", value: "school" },
   { label: "Студентам", value: "individual" },
   { label: "Индивидуальным туристам", value: "student" },
+];
+
+export const categoryNasledie = [
+  { label: "Рязань", value: "ryazan" },
+  { label: "Касимов", value: "kasimov" },
 ];
