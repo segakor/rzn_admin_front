@@ -2,10 +2,10 @@ import { axiosClient } from "../config";
 
 export type TImageData = {
   id: number;
-  imagePath: string
-}
+  imagePath: string;
+};
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const uploadImgBB = async (data: any, destination: string) => {
+export const uploadImage = async (data: any, destination: string) => {
   //NOTE: data type UploadRequestOption
   try {
     const form = new FormData();
@@ -14,7 +14,7 @@ export const uploadImgBB = async (data: any, destination: string) => {
       params: { destination },
     });
     data.onSuccess(response.data);
-    return response.data
+    return response.data;
   } catch (error) {
     data.onError(error);
   }

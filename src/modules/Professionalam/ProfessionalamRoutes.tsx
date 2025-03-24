@@ -4,9 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import { PrivateRoute } from "../../components/PrivateRoute";
 
 export const ProfessionalamRoutes = () => {
-  const AgentstvoRazvitiyaTurizma = lazy(
-    () => import("./AgentstvoRazvitiyaTurizma")
-  );
   const BazaZnanij = lazy(() => import("./BazaZnanij"));
   const ReestrTuroperatorov = lazy(() => import("./ReestrTuroperatorov"));
   const NovostiArt = lazy(() => import("./NovostiArt"));
@@ -14,15 +11,7 @@ export const ProfessionalamRoutes = () => {
   return (
     <Suspense fallback={<Spin />}>
       <Routes>
-        <Route path="professionalam" element={<PrivateRoute/>}>
-          <Route
-            path="agentstvo-razvitiya-turizma"
-            element={
-              <Suspense fallback={<Spin />}>
-                <AgentstvoRazvitiyaTurizma />
-              </Suspense>
-            }
-          />
+        <Route path="professionalam" element={<PrivateRoute />}>
           <Route
             path="baza-znanij"
             element={

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Image, Upload } from "antd";
 import type { GetProp, UploadFile, UploadProps } from "antd";
-import { uploadImgBB } from "../../api/uploadImage";
+import { uploadImage } from "../../api/uploadImage";
 import { getImageUrl } from "../../service/getImageUrl";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
@@ -48,7 +48,7 @@ export const ImageUploader = ({ onChange, destination, initialPath }: Props) => 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getImageData = async (data: any) => {
     try {
-      const res = await uploadImgBB(data, destination);
+      const res = await uploadImage(data, destination);
       if (res) {
         onChange(res.id);
       }

@@ -80,10 +80,6 @@ export const menuItems = [
     key: "Профессионалам",
     label: "Профессионалам",
     children: [
-      {
-        label: "Агентство развития туризма",
-        key: "/professionalam/agentstvo-razvitiya-turizma",
-      },
       { label: "База знаний", key: "/professionalam/baza-znanij" },
       {
         label: "Реестр туроператоров",
@@ -96,7 +92,15 @@ export const menuItems = [
     key: "Проекты",
     label: "Проекты",
     children: [
-      { label: "Библиотека", key: "/projects/biblioteka" },
+      {
+        label: "Библиотека",
+        key: "/projects/biblioteka",
+        children: [
+          { key: "/projects/biblioteka/poslushat", label: "Послушать" },
+          { key: "/projects/biblioteka/posmotret", label: "Посмотреть" },
+          { key: "/projects/biblioteka/pochitat", label: "Почитать" },
+        ],
+      },
       { label: "Промтуризм", key: "/projects/promturizm" },
     ],
   },

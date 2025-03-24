@@ -8,6 +8,9 @@ export const fileDestination = {
   PROMTURIZM: "promturizm",
   BANNER: "banner",
   NASLEDIE: "nasledie",
+  BIBLIOTEKA_POSLUSHAT: "biblioteka_poslushat",
+  BIBLIOTEKA_POSMOTRET: "biblioteka_posmotret",
+  BIBLIOTEKA_POCHITAT: "biblioteka_pochitat",
 };
 
 export const longredIitle = {

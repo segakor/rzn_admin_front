@@ -1,24 +1,24 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { notification } from "antd";
 import {
-  createGid,
-  deleteGid,
-  getGid,
-  getGidDetail,
-  TCreateGid,
-  TUpdateGid,
-  updateGid,
-} from "../api/gid";
+  getBibliotekaPochitat,
+  getBibliotekaPochitatDetail,
+  createBibliotekaPochitatDetail,
+  updateBibliotekaPochitat,
+  deleteBibliotekaPochitat,
+  TUpdateBibliotekaPochitat,
+  TCreateBibliotekaPochitat,
+} from "../api/biblioteka";
 
-const GET_GID = "GET_GID";
-const GET_GID_DETAIL = "GET_GID_DETAIL";
+const GET_POCHITAT = "GET_POCHITAT";
+const GET_POCHITAT_DETAIL = "GET_POCHITAT_DETAIL";
 
-export const useGetGid = () => {
+export const useGetBibliotekaPochitat = () => {
   return useQuery({
-    queryKey: [GET_GID],
+    queryKey: [GET_POCHITAT],
     queryFn: async () => {
       try {
-        return await getGid();
+        return await getBibliotekaPochitat();
       } catch {
         notification.error({
           message: "Не удалось загрузить данные",
@@ -31,31 +31,32 @@ export const useGetGid = () => {
   });
 };
 
-export const useGetGidDetail = (id: string) => {
+export const useGetBibliotekaPochitatDetail = (id: string) => {
   return useQuery({
-    queryKey: [GET_GID_DETAIL, id],
-    queryFn: () => getGidDetail(id),
+    queryKey: [GET_POCHITAT_DETAIL, id],
+    queryFn: () => getBibliotekaPochitatDetail(id),
   });
 };
 
-export const useDeleteGid = () => {
+export const useDeleteBibliotekaPochitat = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (id: number) => deleteGid(id),
+    mutationFn: (id: number) => deleteBibliotekaPochitat(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [GET_GID] });
+      queryClient.invalidateQueries({ queryKey: [GET_POCHITAT] });
     },
   });
 };
 
-export const useCreateGid = () => {
+export const useCreateBibliotekaPochitat = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (body: TCreateGid) => createGid(body),
+    mutationFn: (body: TCreateBibliotekaPochitat) =>
+      createBibliotekaPochitatDetail(body),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [GET_GID] });
+      queryClient.invalidateQueries({ queryKey: [GET_POCHITAT] });
       notification.success({
         message: "Запись создана",
         duration: 5,
@@ -71,14 +72,15 @@ export const useCreateGid = () => {
   });
 };
 
-export const useUpdateGid = () => {
+export const useUpdateBibliotekaPochitat = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (body: TUpdateGid) => updateGid(body),
+    mutationFn: (body: TUpdateBibliotekaPochitat) =>
+      updateBibliotekaPochitat(body),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: [GET_GID_DETAIL],
+        queryKey: [GET_POCHITAT_DETAIL],
       });
       notification.success({
         message: "Запись обновлена",

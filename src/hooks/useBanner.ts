@@ -11,7 +11,7 @@ import {
 } from "../api/banner";
 
 const GET_BANNER = "GET_BANNER";
-const GET_GIT_DETAIL = "GET_GIT_DETAIL";
+const GET_BANNER_DETAIL = "GET_BANNER_DETAIL";
 
 export const useGetBanner = () => {
   return useQuery({
@@ -33,7 +33,7 @@ export const useGetBanner = () => {
 
 export const useGetBannerDetail = (id: string) => {
   return useQuery({
-    queryKey: [GET_GIT_DETAIL, id],
+    queryKey: [GET_BANNER_DETAIL, id],
     queryFn: () => getBannerDetail(id),
   });
 };
@@ -78,7 +78,7 @@ export const useUpdateBanner = () => {
     mutationFn: (body: TUpdateBanner) => updateBanner(body),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: [GET_GIT_DETAIL],
+        queryKey: [GET_BANNER_DETAIL],
       });
       notification.success({
         message: "Запись обновлена",
