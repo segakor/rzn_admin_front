@@ -54,7 +54,7 @@ export const configStylesSet = [
     element: "div",
     attributes: {
       class:
-        "factBlock p-[30px] bg-[#5363f7] rounded-[30px] text-white before:content-[url('/factBlock/fact.svg')] grid gap-3 items-center",
+        "factBlock p-[30px] bg-[#5363f7] rounded-[30px] text-white before:content-[url('/factBlock/fact.svg')] flex gap-3 items-center",
     },
   },
   {
